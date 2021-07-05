@@ -186,7 +186,7 @@ function custom_text_length(_str, _length)
 	return _length
 }
 
-//@function draw_sprite_pscaled(sprite, subimage, x, y, xscale (in pixels), yscale (in pixels), rot, col, alpha)
+///@function draw_sprite_pscaled(sprite, subimage, x, y, xscale (in pixels), yscale (in pixels), rot, col, alpha)
 // Does draw_sprite_ext with pixel scaling instead of relative scaling
 function draw_sprite_pscaled(_sprite, _subimage, _x, _y, _xpscale, _ypscale, _rot, _col, _alpha)
 {
@@ -218,4 +218,51 @@ function change_music(_track)
 			}
 		}
 	}
+}
+
+function convert_string(_string, _width)
+{
+	_string = string_insert("* ", _string, 1);
+	_string = string_replace_all(_string, "#", "\n*");
+	var _s_width = string_width(_string);
+	var _s_length = string_length(_string);
+	
+	var _struct_string = "";
+	var _word_string = "";
+	
+	
+	var _last_width = 0;
+	var _last_space = 0;
+	
+	for (var i = 1; i < _s_length + 1; i++)
+	{
+		if (string_pos(string_char_at(_string, i), "\n") != 0)
+		{
+			_struct_string += _word_string + "\n";
+			_word_string = "";
+			_last_width = 0;
+			continue;
+		}
+		else
+		{
+			_word_string = _word_string + string_char_at(_string, i);
+		}
+		
+		
+		if ((_last_width + string_width(_word_string)) > _width)
+		{
+			_struct_string += "\n  ";
+			_last_width = 0;
+			_last_space = i;
+		}
+		if (string_char_at(_string, i) == " ")
+		{
+			_struct_string += _word_string
+			_last_width += string_width(_word_string);
+			_last_space = i;
+			_word_string = "";
+		}
+	}
+	_struct_string += _word_string
+	return _struct_string;
 }
