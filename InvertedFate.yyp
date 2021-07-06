@@ -41,6 +41,7 @@
     {"id":{"name":"obj_attackbarcharge","path":"objects/obj_attackbarcharge/obj_attackbarcharge.yy",},"order":2,},
     {"id":{"name":"tml_encounter","path":"timelines/tml_encounter/tml_encounter.yy",},"order":0,},
     {"id":{"name":"spr_chara_left","path":"sprites/spr_chara_left/spr_chara_left.yy",},"order":1,},
+    {"id":{"name":"fnt_sans_world","path":"fonts/fnt_sans_world/fnt_sans_world.yy",},"order":3,},
     {"id":{"name":"sfx_voice_asgore","path":"sounds/sfx_voice_asgore/sfx_voice_asgore.yy",},"order":0,},
     {"id":{"name":"spr_ui_head_test_asgore","path":"sprites/spr_ui_head_test_asgore/spr_ui_head_test_asgore.yy",},"order":1,},
     {"id":{"name":"obj_attackbar","path":"objects/obj_attackbar/obj_attackbar.yy",},"order":1,},

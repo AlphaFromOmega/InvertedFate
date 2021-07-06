@@ -42,7 +42,7 @@ infobar_health = display_get_gui_width()/2 - 45;
 
 l = 0;
 print = "";
-str = "* You feel like you're going to \n  have a good time";
+str = string_to_array(convert_string(S_WHITE + "You feel like you're going to have a good time", (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)));
 
 xp_earned = 0;
 gold_earned = 0;

@@ -21,7 +21,7 @@ if ((array_length(str) > l))
 	for (var i = 0; i <= min(l, array_length(str) - 1); i++)
 	{
 		print[i] = str[i];
-		if (string_lettersdigits(string_char_at(str[l], 1)) = "")
+		if (string_lettersdigits(string_char_at(str[l], 1)) == "")
 		{
 			l++;
 		}

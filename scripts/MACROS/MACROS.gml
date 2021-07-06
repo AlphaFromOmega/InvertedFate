@@ -39,3 +39,25 @@ enum BUTTON
 	ITEM,
 	MERCY
 }
+
+
+// Colours for text custom
+#macro S_AQUA "[$"+string(c_aqua)+"]"
+#macro S_BLACK "[$"+string(c_black)+"]"
+#macro S_BLUE "[$"+string(c_blue)+"]"
+#macro S_DARKGRAY "[$"+string(c_dkgray)+"]"
+#macro S_FUCHSIA "[$"+string(c_fuchsia)+"]"
+#macro S_GRAY "[$"+string(c_gray)+"]"
+#macro S_GREEN "[$"+string(c_green)+"]"
+#macro S_LIME "[$"+string(c_lime)+"]"
+#macro S_LIGHTGRAY "[$"+string(c_ltgray)+"]"
+#macro S_MAROON "[$"+string(c_maroon)+"]"
+#macro S_NAVY "[$"+string(c_navy)+"]"
+#macro S_OLIVE "[$"+string(c_olive)+"]"
+#macro S_ORANGE "[$"+string(c_orange)+"]"
+#macro S_PURPLE "[$"+string(c_purple)+"]"
+#macro S_RED "[$"+string(c_red)+"]"
+#macro S_SILVER "[$"+string(c_silver)+"]"
+#macro S_TEAL "[$"+string(c_teal)+"]"
+#macro S_WHITE "[$"+string(c_white)+"]"
+#macro S_YELLOW "[$"+string(c_yellow)+"]"

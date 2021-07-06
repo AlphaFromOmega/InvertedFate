@@ -10,7 +10,6 @@ if (instance_exists(monster))
 	}
 }
 
-
 if (damage > 0)
 {
 	draw_set_color(c_red);
@@ -23,7 +22,8 @@ else
 {
 	draw_set_color(c_grey);
 }
-draw_set_valign(fa_bottom);
+
+draw_set_valign(fa_center);
 draw_set_halign(fa_center);
 draw_set_font(fnt_damage);
 draw_text(x, y + text_y, string(damage));

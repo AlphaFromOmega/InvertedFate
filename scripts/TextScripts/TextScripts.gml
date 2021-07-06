@@ -1,4 +1,4 @@
-///@function create_textbox(message, speed, font, sprite, voice, animation)
+///@function create_textbox(message, speed, [font], [sprite], [voice], [animation])
 function create_textbox(_message, _speed)
 {
 	var _font = (argument_count > 2) ? argument[2] : fnt_textbox;
@@ -24,14 +24,15 @@ function create_textbox(_message, _speed)
 		font = _font;
 		animation = _animation;
 		offset_spr = sprite_exists(_sprite) ? 144 : 0; 
-		str = string_to_array(convert_string(_message, GUI_TEXTBOX_WIDTH - (offset_spr + GUI_MARGIN*4)));
-		show_debug_message(str);
+		str = string_to_array(convert_string(_message, GUI_TEXTBOX_WIDTH - (offset_spr + GUI_MARGIN*4), _font));
 	}
 }
 
-///@function convert_string(string, width)
+///@function convert_string(string, width, [font])
 function convert_string(_string, _width)
 {
+	var _font = (argument_count > 2) ? argument[2] : fnt_textbox;
+	draw_set_font(_font);
 	var _i = 1;
 	switch string_char_at(_string, _i)
 	{

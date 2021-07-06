@@ -90,8 +90,22 @@ switch (hiearchy)
 	{
 		if (ui9slice_x1 == textbox_x1)
 		{
-			l += 30;
-			print = string_copy(str, 1, custom_text_length(str, l/room_speed));
+			if (l  < array_length(str))
+			{
+				l = clamp(l + (15 / room_speed), 0, array_length(str));
+			}
+
+			if ((array_length(str) > l))
+			{
+				for (var i = 0; i < min(l, array_length(str)); i++)
+				{
+					print[i] = str[i];
+					if (string_lettersdigits(string_char_at(str[l], 1)) == "")
+					{
+						l++;
+					}
+				}
+			}
 		}
 		if (keyboard_check_pressed(vk_left))
 		{

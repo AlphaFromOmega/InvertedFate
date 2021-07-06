@@ -12,7 +12,7 @@ switch (obj_battle.hiearchy)
 	}
 	case 0:
 	{
-		x = 17 + GUI_BATTLE_MARGIN_W + (obj_battle.selected_button * (sprite_get_width(spr_ui_battle_act) +  obj_battle.button_seperation));
+		x = 20 + GUI_BATTLE_MARGIN_W + (obj_battle.selected_button * (sprite_get_width(spr_ui_battle_act) +  obj_battle.button_seperation));
 		y = display_get_gui_height() - (sprite_get_height(spr_ui_battle_act)/2 + GUI_BATTLE_MARGIN_H);
 		break;
 	}
@@ -22,8 +22,8 @@ switch (obj_battle.hiearchy)
 		{
 			case 0:
 			{
-				x = obj_battle.textbox_x1 + GUI_MARGIN * 1.5 + 8;
-				y = obj_battle.textbox_y1 + GUI_MARGIN * 1.25 + obj_battle.selected_monster * 30 + 16;
+				x = BATTLE.textbox_x1 + GUI_MARGIN * 1.5 + 16;
+				y = BATTLE.textbox_y1 + (BATTLE.textbox_y2 - BATTLE.textbox_y1)/2 - string_height("A") * 3/2 + string_height("A") * BATTLE.selected_monster + 16;
 				break;
 			}
 		}
