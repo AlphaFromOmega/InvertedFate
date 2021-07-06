@@ -18,4 +18,6 @@ l = 0;
 draw_set_font(fnt_textbox);
 max_line_height = string_height("A") * 3;
 
+
 line_offset = (GUI_TEXTBOX_HEIGHT - max_line_height)/2;
+draw_set_font(fnt_textbox);

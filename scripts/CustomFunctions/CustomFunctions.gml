@@ -1,6 +1,5 @@
-/// draw_text_custom(x,y,string,alpha)
-/// string_extract(str,sep,index)
 
+/// string_extract(str,sep,index)
 function string_extract(_str, _sep, _ind)
 {
 	var _len;
@@ -24,7 +23,7 @@ function draw_text_custom(_x, _y, _str, _alpha)
 	    [$=8388736]or colored text in digits!
 	*/
 
-	var _sep,_w,_xscale,_yscale,_angle,_color, _precol, _prealpha, _strab, v1,v2,v3, d_color;
+	var _xscale,_yscale, _precol, _prealpha, _strab, v1,v2,v3, d_color;
 
 	_xscale = 1
 	_yscale = 1
@@ -57,11 +56,13 @@ function draw_text_custom(_x, _y, _str, _alpha)
 	while(string_length(_strab)>0)
 	{
 
-	        if string_copy(_strab,0,3) = "[$="{
+	        if string_copy(_strab,0,3) = "[$="
+			{
 	            str_color[i] = string_copy(_strab,string_pos("[$=",_strab)+3,string_pos("]",_strab)-string_pos("[$=",_strab)-3)
 	            _strab = string_replace(_strab,string_copy(_strab,0,string_pos("]",_strab)),"")
 	            str_check = false
-	       }else{
+			}
+			else{
 	          if str_check{
 	            str_check = false
 	            str_color[i] = str_color[i-1]
@@ -164,6 +165,8 @@ function draw_text_custom(_x, _y, _str, _alpha)
 	return _str
 }
 
+///@function custom_text_length(string, length)
+// Inputs the length of a requested string, this returns the length including any functional characters within its length
 function custom_text_length(_str, _length)
 {
 	_length = floor(_length);
@@ -174,12 +177,10 @@ function custom_text_length(_str, _length)
 		{
 			case "[":
 			{
-				show_debug_message("[ found")
 				var j = 0;
 				while (string_char_at(_str, i + j) != "]")
 				{
 					j++;
-					show_debug_message(string_char_at(_str, i + j));
 					if (j > 128)
 					{
 						show_debug_message("ISSUE WITH STRING INSERTED INTO custom_text_length: Caught recursive loop with \"]\" search");
@@ -234,68 +235,4 @@ function change_music(_track)
 			}
 		}
 	}
-}
-
-function convert_string(_string, _width)
-{
-	_string = string_insert("* ", _string, 1);
-	_string = string_replace_all(_string, "#", "\n*");
-	var _s_width = string_width(_string);
-	var _s_length = string_length(_string);
-	
-	var _struct_string = "";
-	var _word_string = "";
-	
-	
-	var _last_width = 0;
-	var _last_space = 0;
-	
-	for (var i = 1; i < _s_length + 1; i++)
-	{
-		switch (string_char_at(_string, i))
-		{
-			case "[":
-			{
-				var _func_string = "";
-				var j = i;
-				while !(string_pos(string_char_at(_string, j), "]"))
-				{
-					_struct_string += string_char_at(_string, j);
-					j++;
-				}
-				i = j;
-				_struct_string += _func_string + "]";
-				continue;
-				break;
-			}
-			case "\n":
-			{
-				_struct_string += _word_string + "\n";
-				_word_string = "";
-				_last_width = 0;
-				continue;
-				break;
-			}
-			default:
-			{
-				_word_string = _word_string + string_char_at(_string, i);
-				break;
-			}
-		}
-		if ((_last_width + string_width(_word_string)) > _width)
-		{
-			_struct_string += "\n  ";
-			_last_width = 0;
-			_last_space = i;
-		}
-		if (string_char_at(_string, i) == " ")
-		{
-			_struct_string += _word_string
-			_last_width += string_width(_word_string);
-			_last_space = i;
-			_word_string = "";
-		}
-	}
-	_struct_string += _word_string
-	return _struct_string;
 }
