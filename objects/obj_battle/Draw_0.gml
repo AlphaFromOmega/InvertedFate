@@ -29,7 +29,9 @@ switch (draw_type)
 {
 	case GUI_DRAW.FLAVOUR_TEXT: case GUI_DRAW.WIN_TEXT:
 	{
-		draw_text_custom(textbox_x1 + GUI_MARGIN * 1.5, textbox_y1 + GUI_MARGIN * 1.25, print, 1);
+		var x_dis = textbox_x1 + GUI_MARGIN;
+		var y_dis = textbox_y1 + GUI_MARGIN * 1.25;
+		draw_text_special(x_dis, y_dis, print, 0);
 		break;
 	}
 	case GUI_DRAW.MONSTERS:
@@ -38,13 +40,15 @@ switch (draw_type)
 		{
 			if (instance_exists(display[i]))
 			{
-				var x_dis = textbox_x1 + GUI_MARGIN * 1.5 + string_width("  ");
-				var y_dis = textbox_y1 + GUI_MARGIN * 1.25 + 30 * i
-				draw_text(x_dis, y_dis, string(display[i].monster_name));
+				var x_dis = textbox_x1 + GUI_MARGIN * 1.25 + string_width("  ");
+				var y_dis = textbox_y1 + (textbox_y2 - textbox_y1)/2 - string_height("A") * 3/2 + string_height("A") * i
+				draw_text_special(x_dis, y_dis, display[i].array_name, 0);
+				var _mn = "* " + display[i].monster_name;
+				var _x = max(string_width(_mn) + x_dis + 32, display_get_gui_width()/2);
 				draw_set_color(c_red);
-				draw_rectangle(x_dis + string_width(display[i].monster_name) + 32, y_dis + 8, x_dis + string_width(display[i].monster_name) + 32 + 128, y_dis + 24, false);
+				draw_rectangle(_x, y_dis + 5, _x + 90, y_dis + 25, false);
 				draw_set_color(c_lime);
-				draw_rectangle(x_dis + string_width(display[i].monster_name) + 32, y_dis + 8, x_dis + string_width(display[i].monster_name) + 32 + 128 * (display[i].hp / display[i].max_hp), y_dis + 24, false);
+				draw_rectangle(_x, y_dis + 5, _x + 90 * (display[i].hp / display[i].max_hp), y_dis + 25, false);
 				draw_set_color(c_white);
 			}
 		}

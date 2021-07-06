@@ -1,20 +1,34 @@
 /// @description Insert description here
 // You can write your code in this editor
 hmargin = GUI_MARGIN_H;
-l += change;
-print = string_copy(str, 1, custom_text_length(str, l/room_speed));
+if (l  < array_length(str))
+{
+	l = clamp(l + (change / room_speed), 0, array_length(str));
+}
+
 
 if (keyboard_check_pressed(ord("X")))
 {
-	l = room_speed * string_length(str);
-	print = string_copy(str, 1, string_length(str));
+	l = array_length(str);
+	for (var i = 0; i <= array_length(str) - 1; i++)
+	{
+		print[i] = str[i];
+	}
 }
 
-if ((string_length(str) >= custom_text_length(str, l/room_speed)))
+if ((array_length(str) > l))
 {
-	if ((l div room_speed*2 != char) && string_copy(print,custom_text_length(str, l/room_speed)-1,1) != " ")
+	for (var i = 0; i <= min(l, array_length(str) - 1); i++)
 	{
-		char = l div room_speed*2;
+		print[i] = str[i];
+		if (string_lettersdigits(string_char_at(str[l], 1)) == "")
+		{
+			l++;
+		}
+	}
+	if (string_lettersdigits(string_char_at(str[l], 1)) != "" && char != floor(l))
+	{
+		char = floor(l);
 		audio_play_sound(voice, 2, false);
 	}
 }

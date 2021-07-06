@@ -1,7 +1,8 @@
 /// @description Insert description here
-// You can write your code in this editor
-scr_create_textbox("[$="+string(c_white)+"]Testing String is very" +
-					" \n" + "long in order to show [$="+string(c_blue)+"]" +
-					" \n" + "line breaks", 15, spr_ui_head_test_asgoretalk, sfx_voice_asgore);
-scr_create_textbox("[$="+string(c_white)+"]This is the 2nd Line" +
-					" \n" + "[$="+string(c_yellow)+"]Press Z to exit", 15, spr_ui_head_test_asgore, sfx_voice_asgore);
+
+create_textbox("[$"+string(c_white)+"]This a dialog box#[$"+string(c_yellow)+"]Press Z to continue", 15, fnt_textbox, spr_ui_head_test_asgoretalk, sfx_voice_asgore);
+create_textbox("[$"+string(c_white)+"]Testing String is very long in order to show [$"+string(c_blue)+"]line breaks", 15, fnt_textbox, spr_ui_head_test_asgoretalk, sfx_voice_asgore);
+create_textbox("[$"+string(c_white)+"]This one is faster than before", 60, fnt_textbox, spr_ui_head_test_asgoretalk, sfx_voice_asgore);
+create_textbox("[$"+string(c_white)+"]This one has a seperate font. However all three lines still fit.", 15, fnt_sans_world, spr_ui_head_test_asgoretalk, sfx_voice_asgore);
+create_textbox("[$"+string(c_white)+"]This one has a different animation.#Very shakey", 15, fnt_textbox, spr_ui_head_test_asgoretalk, sfx_voice_asgore, 1);
+create_textbox("[$"+string(c_white)+"]This is the final Line #[$"+string(c_yellow)+"]Press Z to exit", 15, fnt_textbox, spr_ui_head_test_asgore, sfx_voice_asgore);

@@ -1,4 +1,6 @@
 /// @description ?
+init = true;
+array_name = [];
 image_xscale = 2;
 image_yscale = 2;
 

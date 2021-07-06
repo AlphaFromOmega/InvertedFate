@@ -1,6 +1,5 @@
-/// draw_text_custom(x,y,string,alpha)
-/// string_extract(str,sep,index)
 
+/// string_extract(str,sep,index)
 function string_extract(_str, _sep, _ind)
 {
 	var _len;
@@ -24,7 +23,7 @@ function draw_text_custom(_x, _y, _str, _alpha)
 	    [$=8388736]or colored text in digits!
 	*/
 
-	var _sep,_w,_xscale,_yscale,_angle,_color, _precol, _prealpha, _strab, v1,v2,v3, d_color;
+	var _xscale,_yscale, _precol, _prealpha, _strab, v1,v2,v3, d_color;
 
 	_xscale = 1
 	_yscale = 1
@@ -57,11 +56,13 @@ function draw_text_custom(_x, _y, _str, _alpha)
 	while(string_length(_strab)>0)
 	{
 
-	        if string_copy(_strab,0,3) = "[$="{
+	        if string_copy(_strab,0,3) = "[$="
+			{
 	            str_color[i] = string_copy(_strab,string_pos("[$=",_strab)+3,string_pos("]",_strab)-string_pos("[$=",_strab)-3)
 	            _strab = string_replace(_strab,string_copy(_strab,0,string_pos("]",_strab)),"")
 	            str_check = false
-	       }else{
+			}
+			else{
 	          if str_check{
 	            str_check = false
 	            str_color[i] = str_color[i-1]
@@ -164,29 +165,45 @@ function draw_text_custom(_x, _y, _str, _alpha)
 	return _str
 }
 
+///@function custom_text_length(string, length)
+// Inputs the length of a requested string, this returns the length including any functional characters within its length
 function custom_text_length(_str, _length)
 {
-	var str_color
-	for (var i = 0; _length + 1 > i; i++)
+	_length = floor(_length);
+	_length = clamp(_length, 0, string_length(_str));
+	for (var i = 1; i < _length + 1; i++)
 	{
-
-	       if (string_copy(_str,i,3) == "[$=")
-		   {
-	            str_color = string_copy(_str,string_pos("[$=",_str),(string_pos("]",_str) + 1)-string_pos("[$=",_str));
-	            _length += string_length(str_color);
-				i += string_length(str_color);
-	       }
-		   if (string_copy(_str,i,2) == "\n")
-		   {
-	            _length += 2;
-				i += 2;
-	       }
+		switch string_char_at(_str, i)
+		{
+			case "[":
+			{
+				var j = 0;
+				while (string_char_at(_str, i + j) != "]")
+				{
+					j++;
+					if (j > 128)
+					{
+						show_debug_message("ISSUE WITH STRING INSERTED INTO custom_text_length: Caught recursive loop with \"]\" search");
+						break;
+					}
+				}
+				i += j + 1;
+				_length += j + 1;
+				break;
+			}
+			case "\\":
+			{
+	            _length += 1;
+				i += 1;
+				break;
+			}
+		}
 	};
 
 	return _length
 }
 
-//@function draw_sprite_pscaled(sprite, subimage, x, y, xscale (in pixels), yscale (in pixels), rot, col, alpha)
+///@function draw_sprite_pscaled(sprite, subimage, x, y, xscale (in pixels), yscale (in pixels), rot, col, alpha)
 // Does draw_sprite_ext with pixel scaling instead of relative scaling
 function draw_sprite_pscaled(_sprite, _subimage, _x, _y, _xpscale, _ypscale, _rot, _col, _alpha)
 {
