@@ -241,10 +241,10 @@ switch (hiearchy)
 									hiearchy = HIEARCHY.BATTLE_WON;
 									l = 0;
 									
-									win_text = "* YOU WON! \n* You earned " + string(xp_earned) + " EXP and " + string(gold_earned) + "G."
+									win_text = S_WHITE + "YOU WON!#You earned " + string(xp_earned) + " EXP and " + string(gold_earned) + "G."
 									if (xp_earned + global.xp > global.xp_required[global.lv])
 									{
-										win_text += "\n* Your LOVE increased";
+										win_text += "#Your LOVE increased";
 										var cur_xp = global.xp;
 										var temp_earned = xp_earned;
 										while(temp_earned + cur_xp > global.xp_required[global.lv])
@@ -294,8 +294,23 @@ switch (hiearchy)
 		global.hp = global.hp;
 		if (ui9slice_x1 == textbox_x1)
 		{
-			l += 30;
-			print = string_copy(win_text, 1, custom_text_length(win_text, l/room_speed));
+			str = string_to_array(convert_string(win_text, (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)))
+			if (l  < array_length(str))
+			{
+				l = clamp(l + (15 / room_speed), 0, array_length(str));
+			}
+
+			if ((array_length(str) > l))
+			{
+				for (var i = 0; i < min(l, array_length(str)); i++)
+				{
+					print[i] = str[i];
+					if (string_lettersdigits(string_char_at(str[l], 1)) == "")
+					{
+						l++;
+					}
+				}
+			}
 		}
 		break;
 	}

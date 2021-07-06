@@ -28,10 +28,11 @@ function create_textbox(_message, _speed)
 	}
 }
 
-///@function convert_string(string, width, [font])
+///@function convert_string(string, width, [font], astricks)
 function convert_string(_string, _width)
 {
 	var _font = (argument_count > 2) ? argument[2] : fnt_textbox;
+	var _a = (argument_count > 3) ? argument[3] : true;
 	draw_set_font(_font);
 	var _i = 1;
 	switch string_char_at(_string, _i)
@@ -51,8 +52,15 @@ function convert_string(_string, _width)
 			break;
 		}
 	}
-	_string = string_insert("* ", _string, _i);
-	_string = string_replace_all(_string, "#", "\n* ");
+	if (_a)
+	{
+		_string = string_insert("* ", _string, _i);
+		_string = string_replace_all(_string, "#", "\n* ");
+	}
+	else
+	{
+		_string = string_replace_all(_string, "#", "\n");
+	}
 	//var _s_width = string_width(_string);
 	var _s_length = string_length(_string);
 	
