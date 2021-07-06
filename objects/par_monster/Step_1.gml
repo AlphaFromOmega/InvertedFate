@@ -1,4 +1,5 @@
 /// @description ?
+
 y = round((obj_battle.ui9slice_y1 - 8) - (bbox_bottom - y));
 
 hp = clamp(hp, 0, max_hp);

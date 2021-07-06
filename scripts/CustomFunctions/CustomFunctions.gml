@@ -166,21 +166,37 @@ function draw_text_custom(_x, _y, _str, _alpha)
 
 function custom_text_length(_str, _length)
 {
-	var str_color
-	for (var i = 0; _length + 1 > i; i++)
+	_length = floor(_length);
+	_length = clamp(_length, 0, string_length(_str));
+	for (var i = 1; i < _length + 1; i++)
 	{
-
-	       if (string_copy(_str,i,3) == "[$=")
-		   {
-	            str_color = string_copy(_str,string_pos("[$=",_str),(string_pos("]",_str) + 1)-string_pos("[$=",_str));
-	            _length += string_length(str_color);
-				i += string_length(str_color);
-	       }
-		   if (string_copy(_str,i,2) == "\n")
-		   {
-	            _length += 2;
-				i += 2;
-	       }
+		switch string_char_at(_str, i)
+		{
+			case "[":
+			{
+				show_debug_message("[ found")
+				var j = 0;
+				while (string_char_at(_str, i + j) != "]")
+				{
+					j++;
+					show_debug_message(string_char_at(_str, i + j));
+					if (j > 128)
+					{
+						show_debug_message("ISSUE WITH STRING INSERTED INTO custom_text_length: Caught recursive loop with \"]\" search");
+						break;
+					}
+				}
+				i += j + 1;
+				_length += j + 1;
+				break;
+			}
+			case "\\":
+			{
+	            _length += 1;
+				i += 1;
+				break;
+			}
+		}
 	};
 
 	return _length
@@ -236,19 +252,36 @@ function convert_string(_string, _width)
 	
 	for (var i = 1; i < _s_length + 1; i++)
 	{
-		if (string_pos(string_char_at(_string, i), "\n") != 0)
+		switch (string_char_at(_string, i))
 		{
-			_struct_string += _word_string + "\n";
-			_word_string = "";
-			_last_width = 0;
-			continue;
+			case "[":
+			{
+				var _func_string = "";
+				var j = i;
+				while !(string_pos(string_char_at(_string, j), "]"))
+				{
+					_struct_string += string_char_at(_string, j);
+					j++;
+				}
+				i = j;
+				_struct_string += _func_string + "]";
+				continue;
+				break;
+			}
+			case "\n":
+			{
+				_struct_string += _word_string + "\n";
+				_word_string = "";
+				_last_width = 0;
+				continue;
+				break;
+			}
+			default:
+			{
+				_word_string = _word_string + string_char_at(_string, i);
+				break;
+			}
 		}
-		else
-		{
-			_word_string = _word_string + string_char_at(_string, i);
-		}
-		
-		
 		if ((_last_width + string_width(_word_string)) > _width)
 		{
 			_struct_string += "\n  ";
