@@ -61,3 +61,6 @@ enum BUTTON
 #macro S_TEAL "[$"+string(c_teal)+"]"
 #macro S_WHITE "[$"+string(c_white)+"]"
 #macro S_YELLOW "[$"+string(c_yellow)+"]"
+
+
+#macro FNT_ATTACK global.fnt_attack

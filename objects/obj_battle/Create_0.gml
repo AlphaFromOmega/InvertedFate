@@ -7,7 +7,7 @@ atk = 120;
 button_seperation = (display_get_gui_width() - (sprite_get_width(spr_ui_battle_act) * 4 + GUI_BATTLE_MARGIN_W * 2)) / 3;
 
 textbox_x1 = GUI_BATTLE_MARGIN_W;
-textbox_y1 = display_get_gui_height() / 2;
+textbox_y1 = display_get_gui_height() / 2 + 8;
 textbox_x2 = display_get_gui_width() - GUI_BATTLE_MARGIN_W;
 textbox_y2 = display_get_gui_height() / 2 + 150;
 

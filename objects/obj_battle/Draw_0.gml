@@ -30,7 +30,7 @@ switch (draw_type)
 	case GUI_DRAW.FLAVOUR_TEXT: case GUI_DRAW.WIN_TEXT:
 	{
 		var x_dis = textbox_x1 + GUI_MARGIN;
-		var y_dis = textbox_y1 + GUI_MARGIN * 1.25;
+		var y_dis = textbox_y1 + (textbox_y2 - textbox_y1)/2 - string_height("A") * 3/2;
 		draw_text_special(x_dis, y_dis, print, 0);
 		break;
 	}

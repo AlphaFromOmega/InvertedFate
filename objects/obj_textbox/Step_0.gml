@@ -23,7 +23,7 @@ if ((array_length(str) > l))
 		print[i] = str[i];
 		if (string_lettersdigits(string_char_at(str[l], 1)) == "")
 		{
-			l++;
+			l = clamp(l++, 0, array_length(str));
 		}
 	}
 	if (string_lettersdigits(string_char_at(str[l], 1)) != "" && char != floor(l))
