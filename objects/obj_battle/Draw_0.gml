@@ -66,7 +66,6 @@ switch (draw_type)
 	}
 	case GUI_DRAW.ACT_TEXT:
 	{
-		show_debug_message("A")
 		for (var i = 0; i < array_length(target.act); i++)
 		{
 			var x_dis = textbox_x1 + ((i % 2) ? (textbox_x2 - textbox_x1)/2 + string_width("  ") : GUI_MARGIN * 1.25 + string_width("  "));

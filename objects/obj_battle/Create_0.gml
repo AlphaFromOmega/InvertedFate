@@ -33,6 +33,10 @@ button[0] = spr_ui_battle_fight;
 selected_button = 0;
 selected_monster = 0;
 selected_act = 0;
+current_act_text = [];
+
+text_page=0;
+
 display_length = 0;
 target = noone;
 
@@ -41,8 +45,8 @@ instance_create_depth(0, 0, depth-1, obj_soul);
 infobar_bottom = (display_get_gui_height() - (sprite_get_height(button[0]) + GUI_BATTLE_MARGIN_H));
 infobar_health = display_get_gui_width()/2 - 45;
 
-l = 0;
-print = "";
+typewriter_init();
+print = [];
 str = string_to_array(convert_string(S_WHITE + "You feel like you're going to have a good time", (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)));
 
 xp_earned = 0;

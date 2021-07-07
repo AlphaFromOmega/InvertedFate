@@ -12,8 +12,10 @@ ui9slice_y2 = lerp(ui9slice_y2, destined_y2, lerp_prog);
 _hdir = keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left);
 _vdir = keyboard_check_pressed(vk_down) - keyboard_check_pressed(vk_up);
 
-if (((keyboard_check_pressed(ord("Z")) && hiearchy > -1) || (keyboard_check_pressed(ord("X")) && hiearchy > 0)) && !(draw_type == GUI_DRAW.METER))
+if ((keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(ord("X"))) && hiearchy != HIEARCHY.DISABLED && draw_type != GUI_DRAW.METER)
 {
+	var change = keyboard_check_pressed(ord("Z")) - keyboard_check_pressed(ord("X"));
+	var old_hiearchy = hiearchy
 	switch (hiearchy)
 	{
 		case HIEARCHY.BATTLE_WON:
@@ -25,122 +27,156 @@ if (((keyboard_check_pressed(ord("Z")) && hiearchy > -1) || (keyboard_check_pres
 		}
 		case HIEARCHY.BUTTON_RESULT:
 		{
-			l = 0;
+			typewriter_reset();
 			print = [];
-			hiearchy = HIEARCHY.DISABLED;
+			
+			if (change = 1)
+			{
+				if (array_length(target.act_result[selected_act]) - 1 > text_page)
+				{
+					text_page++;
+				}
+				else
+				{
+					hiearchy = HIEARCHY.MONSTER_SPEECH;
+				}
+			}
+			break;
+		}
+		case HIEARCHY.MONSTER_SPEECH:
+		{
+			instance_destroy(obj_textbubble)
+			hiearchy = HIEARCHY.DISABLED
 			draw_type = GUI_DRAW.NONE;
 			instance_create_depth(0, 0, 0, pat_debug_bone);
 			break;
 		}
 		default: // Else reset printing method and change hierchy
 		{
-			l = 0;
+			typewriter_reset();
 			print = [];
-			hiearchy += keyboard_check_pressed(ord("Z")) - keyboard_check_pressed(ord("X"));
+			hiearchy = max(hiearchy + change, 0);
 			audio_play_sound(sfx_select, 1, false);
-			switch (hiearchy)
-			{
-				case HIEARCHY.ACTION_BUTTONS: // If the hiearchy variable is for the action buttons, display flavour text
-				{
-					draw_type = GUI_DRAW.FLAVOUR_TEXT;
-					break;
-				}
-				case HIEARCHY.UI_BUTTONS: // If the hiearchy variable is for the ui buttons, check the responses for each selected button
-				{
-					switch (selected_button)
-					{
-						case BUTTON.FIGHT: // If fight is selected check for all monsters which are alive and have not been spared and display them in a list
-						{
-							selected_monster = 0;
-							draw_type = GUI_DRAW.MONSTERS;
-							display_length = 0;
-							for (var i = 0; i < 6; i++)
-							{
-								display[i] = noone;
-							}
-							for (var i = 0; i < array_length(monsters); i++)
-							{
-								if (monsters[i] != noone && monsters[i].present && monsters[i].hp > 0)
-								{
-									for (var j = 0; j < array_length(display); j++)
-									{
-										if (display[j] == noone)
-										{
-											display[j] = monsters[i];
-											display_length++;
-											break;
-										}
-									}
-								}
-							}
-							break;
-						}
-						case BUTTON.ACT: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
-						{
-							selected_monster = 0;
-							draw_type = GUI_DRAW.MONSTERS;
-							display_length = 0;
-							for (var i = 0; i < 6; i++)
-							{
-								display[i] = noone;
-							}
-							for (var i = 0; i < array_length(monsters); i++)
-							{
-								if (monsters[i] != noone && monsters[i].present && monsters[i].hp > 0)
-								{
-									for (var j = 0; j < array_length(display); j++)
-									{
-										if (display[j] == noone)
-										{
-											display[j] = monsters[i];
-											display_length++;
-											break;
-										}
-									}
-								}
-							}
-							break;
-						}
-					}
-					break;
-				}
-				case HIEARCHY.BUTTON_ACTION: // If the variable is for the actions of the ui buttons 
-				{
-					switch (selected_button)
-					{
-						case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
-						{
-							target = display[selected_monster];
-							draw_type = GUI_DRAW.METER;
-							break;
-						}
-						case BUTTON.ACT: // When a monster is selected on the fight options, display the meter and set the target
-						{
-							target = display[selected_monster];
-							draw_type = GUI_DRAW.ACT_TEXT;
-							break;
-						}
-					}
-					break;
-				}
-				case HIEARCHY.BUTTON_RESULT: // If the variable is for the actions of the ui buttons 
-				{
-					switch (selected_button)
-					{
-						case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
-						{
-						}
-						case BUTTON.ACT: // When a monster is selected on the fight options, display the meter and set the target
-						{
-							l = 0;
-							draw_type = GUI_DRAW.FLAVOUR_TEXT;
-							break;
-						}
-					}
-					break;
-				}
-			}
 			break;
+		}
+	}
+	if (old_hiearchy != hiearchy)
+	{
+		switch (hiearchy)
+		{
+			case HIEARCHY.ACTION_BUTTONS: // If the hiearchy variable is for the action buttons, display flavour text
+			{
+				draw_type = GUI_DRAW.FLAVOUR_TEXT;
+				break;
+			}
+			case HIEARCHY.UI_BUTTONS: // If the hiearchy variable is for the ui buttons, check the responses for each selected button
+			{
+				switch (selected_button)
+				{
+					case BUTTON.FIGHT: // If fight is selected check for all monsters which are alive and have not been spared and display them in a list
+					{
+						selected_monster = 0;
+						draw_type = GUI_DRAW.MONSTERS;
+						display_length = 0;
+						for (var i = 0; i < 6; i++)
+						{
+							display[i] = noone;
+						}
+						for (var i = 0; i < array_length(monsters); i++)
+						{
+							if (monsters[i] != noone && monsters[i].present && monsters[i].hp > 0)
+							{
+								for (var j = 0; j < array_length(display); j++)
+								{
+									if (display[j] == noone)
+									{
+										display[j] = monsters[i];
+										display_length++;
+										break;
+									}
+								}
+							}
+						}
+						break;
+					}
+					case BUTTON.ACT: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
+					{
+						selected_monster = 0;
+						draw_type = GUI_DRAW.MONSTERS;
+						display_length = 0;
+						for (var i = 0; i < 6; i++)
+						{
+							display[i] = noone;
+						}
+						for (var i = 0; i < array_length(monsters); i++)
+						{
+							if (monsters[i] != noone && monsters[i].present && monsters[i].hp > 0)
+							{
+								for (var j = 0; j < array_length(display); j++)
+								{
+									if (display[j] == noone)
+									{
+										display[j] = monsters[i];
+										display_length++;
+										break;
+									}
+								}
+							}
+						}
+						break;
+					}
+				}
+				break;
+			}
+			case HIEARCHY.BUTTON_ACTION: // If the variable is for the actions of the ui buttons 
+			{
+				switch (selected_button)
+				{
+					case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
+					{
+						target = display[selected_monster];
+						draw_type = GUI_DRAW.METER;
+						break;
+					}
+					case BUTTON.ACT: // When a monster is selected on the fight options, display the meter and set the target
+					{
+						target = display[selected_monster];
+						draw_type = GUI_DRAW.ACT_TEXT;
+						break;
+					}
+				}
+				break;
+			}
+			case HIEARCHY.BUTTON_RESULT: // If the variable is for the actions of the ui buttons 
+			{
+				switch (selected_button)
+				{
+					case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
+					{
+					}
+					case BUTTON.ACT: // When an act has been chosen send that to the monster object
+					{
+						l = 0;
+						draw_type = GUI_DRAW.FLAVOUR_TEXT;
+						text_page = 0;
+						with (par_monster)
+						{
+							recieve = -1;
+						}
+						target.recieve = selected_act;
+						break;
+					}
+				}
+				break;
+			}
+			case HIEARCHY.MONSTER_SPEECH:
+			{
+				with (par_monster)
+				{
+					text_bubble = true;
+				}
+				break;
+			}
 		}
 	}
 }
@@ -154,7 +190,7 @@ switch (hiearchy)
 	{
 		if (ui9slice_x1 == textbox_x1)
 		{
-			print = typewriter(str);
+			print = typewriter(str, 30, sfx_voice_generic);
 		}
 		if (keyboard_check_pressed(vk_left))
 		{
@@ -181,24 +217,7 @@ switch (hiearchy)
 		switch (selected_button)
 		{
 			case 0:
-			{
-				/* 2 Wide selection
-				var _last = selected_monster;
-				selected_monster += _hdir + _vdir * 2;
-				if (selected_monster < 0)
-				{
-					selected_monster = display_length - (1 - (_vdir * abs((display_length % 2) - abs((selected_monster - 1) % 2))));
-				}
-				if (selected_monster >= display_length)
-				{
-					selected_monster = _vdir * (selected_monster % 2);
-				}
-				if (_last != selected_monster)
-				{
-					audio_play_sound(sfx_switch, 2, false);
-				}
-				*/
-				
+			{	
 				var _last = selected_monster;
 				selected_monster += _hdir + _vdir;
 				if (selected_monster < 0)
@@ -217,23 +236,6 @@ switch (hiearchy)
 			}
 			case 1:
 			{
-				/* 2 Wide selection
-				var _last = selected_monster;
-				selected_monster += _hdir + _vdir * 2;
-				if (selected_monster < 0)
-				{
-					selected_monster = display_length - (1 - (_vdir * abs((display_length % 2) - abs((selected_monster - 1) % 2))));
-				}
-				if (selected_monster >= display_length)
-				{
-					selected_monster = _vdir * (selected_monster % 2);
-				}
-				if (_last != selected_monster)
-				{
-					audio_play_sound(sfx_switch, 2, false);
-				}
-				*/
-				
 				var _last = selected_monster;
 				selected_monster += _hdir + _vdir;
 				if (selected_monster < 0)
@@ -314,8 +316,7 @@ switch (hiearchy)
 								if (monster_count > 0)
 								{
 									// Start enemy turn
-									hiearchy = HIEARCHY.DISABLED;
-									instance_create_depth(0, 0, 0, pat_debug_bone);
+									hiearchy = HIEARCHY.MONSTER_SPEECH;
 								}
 								else
 								{
@@ -401,7 +402,7 @@ switch (hiearchy)
 			}
 			case BUTTON.ACT:
 			{
-				print = typewriter(target.act_result[selected_act]);
+				print = typewriter(target.act_result[selected_act][text_page], 30, sfx_voice_generic);
 				break;
 			}
 		}
@@ -413,7 +414,7 @@ switch (hiearchy)
 		if (ui9slice_x1 == textbox_x1)
 		{
 			var _str = string_to_array(convert_string(win_text, (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)))
-			print = typewriter(_str);
+			print = typewriter(_str, 15, sfx_voice_generic);
 		}
 		break;
 	}

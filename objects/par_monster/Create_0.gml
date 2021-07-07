@@ -33,3 +33,11 @@ else
 	}
 	show_debug_message(string(monster_name) + " pixel map was created");
 }
+
+spareable = false;
+
+recieve = -1;
+text_bubble = false;
+tb_string = "...";
+
+act_count = [0, 0, 0, 0, 0, 0];
