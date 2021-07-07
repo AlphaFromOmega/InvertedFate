@@ -27,11 +27,18 @@ draw_set_valign(fa_top);
 draw_set_halign(fa_left);
 switch (draw_type)
 {
+	default:
+	{
+		break;
+	}
 	case GUI_DRAW.FLAVOUR_TEXT: case GUI_DRAW.WIN_TEXT:
 	{
-		var x_dis = textbox_x1 + GUI_MARGIN;
-		var y_dis = textbox_y1 + (textbox_y2 - textbox_y1)/2 - string_height("A") * 3/2;
-		draw_text_special(x_dis, y_dis, print, 0);
+		if (textbox_x1 == ui9slice_x1)
+		{
+			var x_dis = textbox_x1 + GUI_MARGIN;
+			var y_dis = textbox_y1 + (textbox_y2 - textbox_y1)/2 - string_height("A") * 3/2;
+			draw_text_special(x_dis, y_dis, print, 0);
+		}
 		break;
 	}
 	case GUI_DRAW.MONSTERS:
@@ -44,13 +51,27 @@ switch (draw_type)
 				var y_dis = textbox_y1 + (textbox_y2 - textbox_y1)/2 - string_height("A") * 3/2 + string_height("A") * i
 				draw_text_special(x_dis, y_dis, display[i].array_name, 0);
 				var _mn = "* " + display[i].monster_name;
-				var _x = max(string_width(_mn) + x_dis + 32, display_get_gui_width()/2);
-				draw_set_color(c_red);
-				draw_rectangle(_x, y_dis + 5, _x + 90, y_dis + 25, false);
-				draw_set_color(c_lime);
-				draw_rectangle(_x, y_dis + 5, _x + 90 * (display[i].hp / display[i].max_hp), y_dis + 25, false);
-				draw_set_color(c_white);
+				if (selected_button == 0)
+				{
+					var _x = max(string_width(_mn) + x_dis + 32, display_get_gui_width()/2);
+					draw_set_color(c_red);
+					draw_rectangle(_x, y_dis + 5, _x + 90, y_dis + 25, false);
+					draw_set_color(c_lime);
+					draw_rectangle(_x, y_dis + 5, _x + 90 * (display[i].hp / display[i].max_hp), y_dis + 25, false);
+					draw_set_color(c_white);
+				}
 			}
+		}
+		break;
+	}
+	case GUI_DRAW.ACT_TEXT:
+	{
+		show_debug_message("A")
+		for (var i = 0; i < array_length(target.act); i++)
+		{
+			var x_dis = textbox_x1 + ((i % 2) ? (textbox_x2 - textbox_x1)/2 + string_width("  ") : GUI_MARGIN * 1.25 + string_width("  "));
+			var y_dis = textbox_y1 + (textbox_y2 - textbox_y1)/2 - string_height("A") * 3/2 + string_height("A") * i div 2;
+			draw_text_special(x_dis, y_dis, target.act[i], 0);
 		}
 		break;
 	}

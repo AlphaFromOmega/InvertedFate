@@ -19,7 +19,7 @@ function damage_player(_amount)
 function end_turn()
 {
 	show_debug_message("Turn Over");
-	BATTLE.hiearchy = 0;
+	BATTLE.hiearchy = HIEARCHY.ACTION_BUTTONS;
 	BATTLE.spawned = 0;
 	BATTLE.draw_type = GUI_DRAW.FLAVOUR_TEXT;
 	with (obj_pattern)

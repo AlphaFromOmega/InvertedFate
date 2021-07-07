@@ -32,6 +32,7 @@ button[0] = spr_ui_battle_fight;
 
 selected_button = 0;
 selected_monster = 0;
+selected_act = 0;
 display_length = 0;
 target = noone;
 

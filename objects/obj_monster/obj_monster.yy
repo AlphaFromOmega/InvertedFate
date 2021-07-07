@@ -29,6 +29,7 @@
     {"propertyId":{"name":"monster_name","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"Test Monster","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"gold_worth","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"5","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"xp_worth","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"7","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"check","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"True","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
     "name": "Testing",

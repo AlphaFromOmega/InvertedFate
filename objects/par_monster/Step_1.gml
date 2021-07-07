@@ -2,6 +2,11 @@
 if (init)
 {
 	array_name = string_to_array(convert_string(S_WHITE + monster_name, 256));
+	if (check)
+	{
+		act[0] = string_to_array(convert_string(S_WHITE + "Check", 128));
+		act_result[0] = string_to_array(convert_string(S_WHITE + string_upper(monster_name) + " ATK " + string(check_atk) + " DEF " + string(check_def) + "#" + string(check_text), (BATTLE.textbox_x2 + GUI_MARGIN * 1.25) - (BATTLE.textbox_x1 + GUI_MARGIN * 1.25)));
+	}
 }
 
 

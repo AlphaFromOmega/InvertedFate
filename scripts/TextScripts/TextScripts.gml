@@ -207,3 +207,22 @@ function draw_text_special(_x, _y, _string, _animation)
 		}
 	}
 }
+
+//
+function typewriter(_str)
+{
+	var _print = [];
+	if (l  < array_length(_str))
+	{
+		l = clamp(l + (15 / room_speed), 0, array_length(_str));
+	}
+	for (var i = 0; i < min(l, array_length(_str)); i++)
+	{
+		_print[i] = _str[i];
+		if (array_length(_str) > l && string_lettersdigits(string_char_at(_str[l], 1)) == "")
+		{
+			l++;
+		}
+	}
+	return _print;
+}

@@ -14,69 +14,133 @@ _vdir = keyboard_check_pressed(vk_down) - keyboard_check_pressed(vk_up);
 
 if (((keyboard_check_pressed(ord("Z")) && hiearchy > -1) || (keyboard_check_pressed(ord("X")) && hiearchy > 0)) && !(draw_type == GUI_DRAW.METER))
 {
-	if (hiearchy == HIEARCHY.BATTLE_WON) // On battle won return to overworld
+	switch (hiearchy)
 	{
-		global.xp += xp_earned;
-		global.gold += gold_earned;
-		room_goto(rm_test);
-	}
-	else // Else reset printing method and change hierchy
-	{
-		l = 0;
-		print = "";
-		hiearchy += keyboard_check_pressed(ord("Z")) - keyboard_check_pressed(ord("X"));
-		audio_play_sound(sfx_select, 1, false);
-		switch (hiearchy)
+		case HIEARCHY.BATTLE_WON:
 		{
-			case HIEARCHY.ACTION_BUTTONS: // If the hiearchy variable is for the action buttons, display flavour text
+			global.xp += xp_earned;
+			global.gold += gold_earned;
+			room_goto(rm_test);
+			break;
+		}
+		case HIEARCHY.BUTTON_RESULT:
+		{
+			l = 0;
+			print = [];
+			hiearchy = HIEARCHY.DISABLED;
+			draw_type = GUI_DRAW.NONE;
+			instance_create_depth(0, 0, 0, pat_debug_bone);
+			break;
+		}
+		default: // Else reset printing method and change hierchy
+		{
+			l = 0;
+			print = [];
+			hiearchy += keyboard_check_pressed(ord("Z")) - keyboard_check_pressed(ord("X"));
+			audio_play_sound(sfx_select, 1, false);
+			switch (hiearchy)
 			{
-				draw_type = GUI_DRAW.FLAVOUR_TEXT;
-				break;
-			}
-			case HIEARCHY.UI_BUTTONS: // If the hiearchy variable is for the ui buttons, check the responses for each selected button
-			{
-				switch (selected_button)
+				case HIEARCHY.ACTION_BUTTONS: // If the hiearchy variable is for the action buttons, display flavour text
 				{
-					case BUTTON.FIGHT: // If fight is selected check for all monsters which are alive and have not been spared and display them in a list
+					draw_type = GUI_DRAW.FLAVOUR_TEXT;
+					break;
+				}
+				case HIEARCHY.UI_BUTTONS: // If the hiearchy variable is for the ui buttons, check the responses for each selected button
+				{
+					switch (selected_button)
 					{
-						draw_type = GUI_DRAW.MONSTERS;
-						display_length = 0;
-						for (var i = 0; i < 6; i++)
+						case BUTTON.FIGHT: // If fight is selected check for all monsters which are alive and have not been spared and display them in a list
 						{
-							display[i] = noone;
-						}
-						for (var i = 0; i < array_length(monsters); i++)
-						{
-							if (monsters[i] != noone && monsters[i].present && monsters[i].hp > 0)
+							selected_monster = 0;
+							draw_type = GUI_DRAW.MONSTERS;
+							display_length = 0;
+							for (var i = 0; i < 6; i++)
 							{
-								for (var j = 0; j < array_length(display); j++)
+								display[i] = noone;
+							}
+							for (var i = 0; i < array_length(monsters); i++)
+							{
+								if (monsters[i] != noone && monsters[i].present && monsters[i].hp > 0)
 								{
-									if (display[j] == noone)
+									for (var j = 0; j < array_length(display); j++)
 									{
-										display[j] = monsters[i];
-										display_length++;
-										break;
+										if (display[j] == noone)
+										{
+											display[j] = monsters[i];
+											display_length++;
+											break;
+										}
 									}
 								}
 							}
+							break;
 						}
-						break;
+						case BUTTON.ACT: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
+						{
+							selected_monster = 0;
+							draw_type = GUI_DRAW.MONSTERS;
+							display_length = 0;
+							for (var i = 0; i < 6; i++)
+							{
+								display[i] = noone;
+							}
+							for (var i = 0; i < array_length(monsters); i++)
+							{
+								if (monsters[i] != noone && monsters[i].present && monsters[i].hp > 0)
+								{
+									for (var j = 0; j < array_length(display); j++)
+									{
+										if (display[j] == noone)
+										{
+											display[j] = monsters[i];
+											display_length++;
+											break;
+										}
+									}
+								}
+							}
+							break;
+						}
 					}
+					break;
 				}
-				break;
-			}
-			case HIEARCHY.BUTTON_ACTION: // If the variable is for the actions of the ui buttons 
-			{
-				switch (selected_button)
+				case HIEARCHY.BUTTON_ACTION: // If the variable is for the actions of the ui buttons 
 				{
-					case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
+					switch (selected_button)
 					{
-						target = display[selected_monster];
-						draw_type = GUI_DRAW.METER;
+						case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
+						{
+							target = display[selected_monster];
+							draw_type = GUI_DRAW.METER;
+							break;
+						}
+						case BUTTON.ACT: // When a monster is selected on the fight options, display the meter and set the target
+						{
+							target = display[selected_monster];
+							draw_type = GUI_DRAW.ACT_TEXT;
+							break;
+						}
 					}
+					break;
 				}
-				break;
+				case HIEARCHY.BUTTON_RESULT: // If the variable is for the actions of the ui buttons 
+				{
+					switch (selected_button)
+					{
+						case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
+						{
+						}
+						case BUTTON.ACT: // When a monster is selected on the fight options, display the meter and set the target
+						{
+							l = 0;
+							draw_type = GUI_DRAW.FLAVOUR_TEXT;
+							break;
+						}
+					}
+					break;
+				}
 			}
+			break;
 		}
 	}
 }
@@ -90,22 +154,7 @@ switch (hiearchy)
 	{
 		if (ui9slice_x1 == textbox_x1)
 		{
-			if (l  < array_length(str))
-			{
-				l = clamp(l + (15 / room_speed), 0, array_length(str));
-			}
-
-			if ((array_length(str) > l))
-			{
-				for (var i = 0; i < min(l, array_length(str)); i++)
-				{
-					print[i] = str[i];
-					if (string_lettersdigits(string_char_at(str[l], 1)) == "")
-					{
-						l++;
-					}
-				}
-			}
+			print = typewriter(str);
 		}
 		if (keyboard_check_pressed(vk_left))
 		{
@@ -166,6 +215,41 @@ switch (hiearchy)
 				}
 				break;
 			}
+			case 1:
+			{
+				/* 2 Wide selection
+				var _last = selected_monster;
+				selected_monster += _hdir + _vdir * 2;
+				if (selected_monster < 0)
+				{
+					selected_monster = display_length - (1 - (_vdir * abs((display_length % 2) - abs((selected_monster - 1) % 2))));
+				}
+				if (selected_monster >= display_length)
+				{
+					selected_monster = _vdir * (selected_monster % 2);
+				}
+				if (_last != selected_monster)
+				{
+					audio_play_sound(sfx_switch, 2, false);
+				}
+				*/
+				
+				var _last = selected_monster;
+				selected_monster += _hdir + _vdir;
+				if (selected_monster < 0)
+				{
+					selected_monster = display_length - 1;
+				}
+				if (selected_monster >= display_length)
+				{
+					selected_monster = 0;
+				}
+				if (_last != selected_monster)
+				{
+					audio_play_sound(sfx_switch, 2, false);
+				}
+				break;
+			}
 		}
 		break;
 	}
@@ -173,7 +257,7 @@ switch (hiearchy)
 	{
 		switch (selected_button)
 		{
-			case 0:
+			case BUTTON.FIGHT:
 			{
 				if (spawned < spawn_max) // If bars do not excceed the max
 				{
@@ -286,6 +370,40 @@ switch (hiearchy)
 				}
 				break;
 			}
+			case BUTTON.ACT:
+			{
+				var _last = selected_act;
+				selected_act += _hdir + _vdir * 2;
+				if (selected_act < 0)
+				{
+					selected_act = display_length - (1 - (_vdir * abs((display_length % 2) - abs((selected_act - 1) % 2))));
+				}
+				if (selected_act >= display_length)
+				{
+					selected_act = _vdir * (selected_act % 2);
+				}
+				if (_last != selected_act)
+				{
+					audio_play_sound(sfx_switch, 2, false);
+				}
+				break;
+			}
+		}
+		break;
+	}
+	case HIEARCHY.BUTTON_RESULT:
+	{
+		switch (selected_button)
+		{
+			case BUTTON.FIGHT:
+			{
+				// Attack
+			}
+			case BUTTON.ACT:
+			{
+				print = typewriter(target.act_result[selected_act]);
+				break;
+			}
 		}
 		break;
 	}
@@ -294,23 +412,8 @@ switch (hiearchy)
 		global.hp = global.hp;
 		if (ui9slice_x1 == textbox_x1)
 		{
-			str = string_to_array(convert_string(win_text, (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)))
-			if (l  < array_length(str))
-			{
-				l = clamp(l + (15 / room_speed), 0, array_length(str));
-			}
-
-			if ((array_length(str) > l))
-			{
-				for (var i = 0; i < min(l, array_length(str)); i++)
-				{
-					print[i] = str[i];
-					if (string_lettersdigits(string_char_at(str[l], 1)) == "")
-					{
-						l++;
-					}
-				}
-			}
+			var _str = string_to_array(convert_string(win_text, (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)))
+			print = typewriter(_str);
 		}
 		break;
 	}
