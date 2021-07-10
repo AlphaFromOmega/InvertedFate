@@ -1,8 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
-global.battleZ = false;
 
-atk = 120;
+atk = 120; // Max Attack power (will be based on the global variable in the future)
 
 button_seperation = (display_get_gui_width() - (sprite_get_width(spr_ui_battle_act) * 4 + GUI_BATTLE_MARGIN_W * 2)) / 3;
 
@@ -33,9 +32,8 @@ button[0] = spr_ui_battle_fight;
 selected_button = 0;
 selected_monster = 0;
 selected_act = 0;
-current_act_text = [];
 
-text_page=0;
+text_page = 0;
 
 display_length = 0;
 target = noone;
@@ -45,16 +43,10 @@ instance_create_depth(0, 0, depth-1, obj_soul);
 infobar_bottom = (display_get_gui_height() - (sprite_get_height(button[0]) + GUI_BATTLE_MARGIN_H));
 infobar_health = display_get_gui_width()/2 - 45;
 
-typewriter_init();
-print = [];
-str = string_to_array(convert_string(S_WHITE + "You feel like you're going to have a good time", (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)));
-
 xp_earned = 0;
 gold_earned = 0;
 
 win_text = "ah shit something fucked up";
-
-hiearchy = 0;
 
 for (var i = 0; i < 6; i++)
 {
@@ -70,4 +62,12 @@ for (var i = 0; i < spawn_max; i++)
 	attack_accuracy[i] = -1;
 }
 
-change_music(mus_enemyapproaching);
+change_music(music); // Adjusts music
+
+typewriter_init(); // Enables Typewriter Variables
+print = []; // Print result
+turn = 0; // Turn number (primarily used for flavour text)
+str = string_to_array(convert_string(script_execute(flavour_script), (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25) - 32));
+
+hiearchy = 0;
+set_hiearchy(HIEARCHY.ACTION_BUTTONS);

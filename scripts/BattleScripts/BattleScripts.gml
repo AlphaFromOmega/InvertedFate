@@ -59,3 +59,198 @@ function create_circular_attack(_object, _target_x, _target_y, _radius, _amount,
 	}
 	return _ins;
 }
+function get_monsters()
+{
+	var _monster;
+	for (var i = 0; i < instance_number(par_monster); i++;)
+	{
+		_monster[i] = instance_find(par_monster, i);
+	}
+	return _monster;
+}
+function find_target_monster()
+{
+	var _target
+	with (par_monster)
+	{
+		if (recieve != MONSTER_MS.NO_TARGET)
+		{
+			_target = id
+		}
+	}
+	return _target;
+}
+
+/// @function change_hieachy([amount])
+function change_hiearchy()
+{
+	var _change = (argument_count > 0) ? argument[0] : 0;
+	
+	typewriter_reset();
+	print = [];
+	hiearchy += _change;
+	
+	switch (hiearchy)
+	{
+		case HIEARCHY.DISABLED:
+		{
+			instance_destroy(obj_textbubble);
+			draw_type = GUI_DRAW.NONE;
+			instance_create_depth(0, 0, 0, pat_debug_bone);
+			
+			turn++;
+			str = string_to_array(convert_string(script_execute(flavour_script), (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)));
+			break;
+		}
+		
+		case HIEARCHY.ACTION_BUTTONS: // If the hiearchy variable is for the action buttons, display flavour text
+		{
+			draw_type = GUI_DRAW.FLAVOUR_TEXT;
+			break;
+		}
+		
+		case HIEARCHY.UI_BUTTONS: // If the hiearchy variable is for the ui buttons, check the responses for each selected button
+		{
+			switch (selected_button)
+			{
+				case BUTTON.FIGHT: // If fight is selected check for all monsters which are alive and have not been spared and display them in a list
+				{
+					selected_monster = 0;
+					draw_type = GUI_DRAW.MONSTERS;
+					display_length = 0;
+					for (var i = 0; i < 6; i++)
+					{
+						display[i] = noone;
+					}
+					for (var i = 0; i < array_length(monsters); i++)
+					{
+						if (monsters[i] != noone && monsters[i].present && monsters[i].hp > 0)
+						{
+							for (var j = 0; j < array_length(display); j++)
+							{
+								if (display[j] == noone)
+								{
+									display[j] = monsters[i];
+									display_length++;
+									break;
+								}
+							}
+						}
+					}
+					break;
+				}
+				case BUTTON.ACT: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
+				{
+					selected_monster = 0;
+					draw_type = GUI_DRAW.MONSTERS;
+					display_length = 0;
+					for (var i = 0; i < 6; i++)
+					{
+						display[i] = noone;
+					}
+					for (var i = 0; i < array_length(monsters); i++)
+					{
+						if (monsters[i] != noone && monsters[i].present && monsters[i].hp > 0)
+						{
+							for (var j = 0; j < array_length(display); j++)
+							{
+								if (display[j] == noone)
+								{
+									display[j] = monsters[i];
+									display_length++;
+									break;
+								}
+							}
+						}
+					}
+					break;
+				}
+			}
+			break;
+		}
+		case HIEARCHY.BUTTON_ACTION: // If the variable is for the actions of the ui buttons 
+		{
+			switch (selected_button)
+			{
+				case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
+				{
+					target = display[selected_monster];
+					draw_type = GUI_DRAW.METER;
+					
+					text_page = 0;
+					break;
+				}
+				case BUTTON.ACT: // When a monster is selected on the fight options, display the meter and set the target
+				{
+					target = display[selected_monster];
+					draw_type = GUI_DRAW.ACT_TEXT;
+					break;
+				}
+			}
+			break;
+		}
+		case HIEARCHY.BUTTON_RESULT:
+		{
+			switch (selected_button)
+			{
+				case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
+				{
+					break;
+				}
+				case BUTTON.ACT: // When an act has been chosen send that to the monster object
+				{
+					l = 0;
+					draw_type = GUI_DRAW.FLAVOUR_TEXT;
+					text_page = 0;
+					with (par_monster)
+					{
+						recieve = MONSTER_MS.NO_TARGET;
+					}
+					target.recieve = selected_act;
+					target.act_count[selected_act]++;
+					break;
+				}
+			}
+			break;
+		}
+		case HIEARCHY.MONSTER_SPEECH:
+		{
+			with (par_monster)
+			{
+				text_bubble = true;
+			}
+			break;
+		}
+		case HIEARCHY.BATTLE_WON:
+		{
+			selected_button = -1;
+			draw_type = GUI_DRAW.WIN_TEXT;
+			l = 0;
+			win_text = S_WHITE + "YOU WON!#You earned " + string(xp_earned) + " EXP and " + string(gold_earned) + "G."
+								
+			if (xp_earned + global.xp > global.xp_required[global.lv])
+			{
+				win_text += "#Your LOVE increased";
+				var cur_xp = global.xp;
+				var temp_earned = xp_earned;
+				while(temp_earned + cur_xp > global.xp_required[global.lv])
+				{
+					global.lv++;
+					show_debug_message(global.lv);
+					var prev_xp = cur_xp;
+					cur_xp = global.xp_required[global.lv];
+					temp_earned -= cur_xp - prev_xp;
+				}
+			update_stats();
+			audio_play_sound(sfx_levelup, 100, false);
+			}
+			break;
+		}
+	}
+}
+
+/// @function set_hiearchy(hiearchy_id)
+function set_hiearchy(_set)
+{
+	change_hiearchy(_set - hiearchy);
+}

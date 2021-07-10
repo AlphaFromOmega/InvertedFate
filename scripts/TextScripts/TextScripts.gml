@@ -233,7 +233,7 @@ function typewriter(_str)
 		tw_letter = array_length(_str);
 	}
 	var _print = [];
-	tw_letter = clamp(tw_letter + (_spd / room_speed), 0, array_length(_str));
+	tw_letter = clamp(tw_letter + (_spd * delta_time/1000000), 0, array_length(_str));
 	var tw_clamped = min(tw_letter, array_length(_str) - 1)
 	if (tw_last_letter != floor(tw_letter) && string_lettersdigits(string_char_at(_str[tw_clamped], 1)) != "")
 	{

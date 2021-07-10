@@ -42,6 +42,12 @@ enum BUTTON
 	MERCY
 }
 
+enum MONSTER_MS
+{
+	NULL = -3,
+	NO_TARGET = -2,
+	ATTACKED = -1
+}
 
 // Colours for text custom
 #macro S_AQUA "[$"+string(c_aqua)+"]"

@@ -28,8 +28,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Patterns",
-    "path": "folders/Objects/Battle/Patterns.yy",
+    "name": "Attack Patterns",
+    "path": "folders/Objects/Battle/Attack Patterns.yy",
   },
   "resourceVersion": "1.0",
   "name": "pat_debug_bone",

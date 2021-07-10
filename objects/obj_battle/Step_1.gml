@@ -15,168 +15,51 @@ _vdir = keyboard_check_pressed(vk_down) - keyboard_check_pressed(vk_up);
 if ((keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(ord("X"))) && hiearchy != HIEARCHY.DISABLED && draw_type != GUI_DRAW.METER)
 {
 	var change = keyboard_check_pressed(ord("Z")) - keyboard_check_pressed(ord("X"));
-	var old_hiearchy = hiearchy
 	switch (hiearchy)
 	{
-		case HIEARCHY.BATTLE_WON:
-		{
-			global.xp += xp_earned;
-			global.gold += gold_earned;
-			room_goto(rm_test);
-			break;
-		}
 		case HIEARCHY.BUTTON_RESULT:
 		{
-			typewriter_reset();
-			print = [];
-			
-			if (change = 1)
+			if (selected_button == BUTTON.ACT && change > 0)
 			{
-				if (array_length(target.act_result[selected_act]) - 1 > text_page)
+				if (array_length(print) == array_length(target.act_result[selected_act][text_page]))
 				{
-					text_page++;
+					typewriter_reset();
+					print = [];
+					if (array_length(target.act_result[selected_act]) - 1 > text_page)
+					{
+						text_page++;
+					}
+					else
+					{
+						set_hiearchy(HIEARCHY.MONSTER_SPEECH);
+					}
 				}
-				else
-				{
-					hiearchy = HIEARCHY.MONSTER_SPEECH;
-				}
+			}
+			else
+			{
+				set_hiearchy(HIEARCHY.DISABLED);
 			}
 			break;
 		}
 		case HIEARCHY.MONSTER_SPEECH:
 		{
-			instance_destroy(obj_textbubble)
-			hiearchy = HIEARCHY.DISABLED
-			draw_type = GUI_DRAW.NONE;
-			instance_create_depth(0, 0, 0, pat_debug_bone);
+			set_hiearchy(HIEARCHY.DISABLED);
 			break;
 		}
-		default: // Else reset printing method and change hierchy
+		case HIEARCHY.BATTLE_WON:
 		{
-			typewriter_reset();
-			print = [];
-			hiearchy = max(hiearchy + change, 0);
-			audio_play_sound(sfx_select, 1, false);
+			if (change > 0)
+			{
+				global.xp += xp_earned;
+				global.gold += gold_earned;
+				room_goto(rm_test);
+			}
 			break;
 		}
-	}
-	if (old_hiearchy != hiearchy)
-	{
-		switch (hiearchy)
+		default:
 		{
-			case HIEARCHY.ACTION_BUTTONS: // If the hiearchy variable is for the action buttons, display flavour text
-			{
-				draw_type = GUI_DRAW.FLAVOUR_TEXT;
-				break;
-			}
-			case HIEARCHY.UI_BUTTONS: // If the hiearchy variable is for the ui buttons, check the responses for each selected button
-			{
-				switch (selected_button)
-				{
-					case BUTTON.FIGHT: // If fight is selected check for all monsters which are alive and have not been spared and display them in a list
-					{
-						selected_monster = 0;
-						draw_type = GUI_DRAW.MONSTERS;
-						display_length = 0;
-						for (var i = 0; i < 6; i++)
-						{
-							display[i] = noone;
-						}
-						for (var i = 0; i < array_length(monsters); i++)
-						{
-							if (monsters[i] != noone && monsters[i].present && monsters[i].hp > 0)
-							{
-								for (var j = 0; j < array_length(display); j++)
-								{
-									if (display[j] == noone)
-									{
-										display[j] = monsters[i];
-										display_length++;
-										break;
-									}
-								}
-							}
-						}
-						break;
-					}
-					case BUTTON.ACT: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
-					{
-						selected_monster = 0;
-						draw_type = GUI_DRAW.MONSTERS;
-						display_length = 0;
-						for (var i = 0; i < 6; i++)
-						{
-							display[i] = noone;
-						}
-						for (var i = 0; i < array_length(monsters); i++)
-						{
-							if (monsters[i] != noone && monsters[i].present && monsters[i].hp > 0)
-							{
-								for (var j = 0; j < array_length(display); j++)
-								{
-									if (display[j] == noone)
-									{
-										display[j] = monsters[i];
-										display_length++;
-										break;
-									}
-								}
-							}
-						}
-						break;
-					}
-				}
-				break;
-			}
-			case HIEARCHY.BUTTON_ACTION: // If the variable is for the actions of the ui buttons 
-			{
-				switch (selected_button)
-				{
-					case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
-					{
-						target = display[selected_monster];
-						draw_type = GUI_DRAW.METER;
-						break;
-					}
-					case BUTTON.ACT: // When a monster is selected on the fight options, display the meter and set the target
-					{
-						target = display[selected_monster];
-						draw_type = GUI_DRAW.ACT_TEXT;
-						break;
-					}
-				}
-				break;
-			}
-			case HIEARCHY.BUTTON_RESULT: // If the variable is for the actions of the ui buttons 
-			{
-				switch (selected_button)
-				{
-					case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
-					{
-					}
-					case BUTTON.ACT: // When an act has been chosen send that to the monster object
-					{
-						l = 0;
-						draw_type = GUI_DRAW.FLAVOUR_TEXT;
-						text_page = 0;
-						with (par_monster)
-						{
-							recieve = -1;
-						}
-						target.recieve = selected_act;
-						break;
-					}
-				}
-				break;
-			}
-			case HIEARCHY.MONSTER_SPEECH:
-			{
-				with (par_monster)
-				{
-					text_bubble = true;
-				}
-				break;
-			}
+			audio_play_sound(sfx_select, 100, false);
+			change_hiearchy(change);
 		}
 	}
 }
@@ -316,33 +199,17 @@ switch (hiearchy)
 								if (monster_count > 0)
 								{
 									// Start enemy turn
-									hiearchy = HIEARCHY.MONSTER_SPEECH;
+									with (par_monster)
+									{
+										recieve = MONSTER_MS.NO_TARGET;
+									}
+									target.recieve = MONSTER_MS.ATTACKED;
+									set_hiearchy(HIEARCHY.MONSTER_SPEECH);
 								}
 								else
 								{
 									// Player has won
-									selected_button = -1;
-									draw_type = GUI_DRAW.WIN_TEXT;
-									hiearchy = HIEARCHY.BATTLE_WON;
-									l = 0;
-									
-									win_text = S_WHITE + "YOU WON!#You earned " + string(xp_earned) + " EXP and " + string(gold_earned) + "G."
-									if (xp_earned + global.xp > global.xp_required[global.lv])
-									{
-										win_text += "#Your LOVE increased";
-										var cur_xp = global.xp;
-										var temp_earned = xp_earned;
-										while(temp_earned + cur_xp > global.xp_required[global.lv])
-										{
-											global.lv++;
-											show_debug_message(global.lv);
-											var prev_xp = cur_xp;
-											cur_xp = global.xp_required[global.lv];
-											temp_earned -= cur_xp - prev_xp;
-										}
-										update_stats();
-										audio_play_sound(sfx_levelup, 100, false);
-									}
+									set_hiearchy(HIEARCHY.BATTLE_WON);
 								}
 							}
 						}
@@ -414,7 +281,7 @@ switch (hiearchy)
 		if (ui9slice_x1 == textbox_x1)
 		{
 			var _str = string_to_array(convert_string(win_text, (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)))
-			print = typewriter(_str, 15, sfx_voice_generic);
+			print = typewriter(_str, 30, sfx_voice_generic);
 		}
 		break;
 	}
