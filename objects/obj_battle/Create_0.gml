@@ -30,7 +30,7 @@ button[1] = spr_ui_battle_act;
 button[0] = spr_ui_battle_fight;
 
 selected_button = 0;
-selected_monster = 0;
+selected_option = 0;
 selected_act = 0;
 
 text_page = 0;
@@ -68,6 +68,14 @@ typewriter_init(); // Enables Typewriter Variables
 print = []; // Print result
 turn = 0; // Turn number (primarily used for flavour text)
 str = string_to_array(convert_string(script_execute(flavour_script), (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25) - 32));
+
+mercy[0] = string_to_array(convert_string(S_WHITE + "Spare", (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25) - 3));
+mercy[1] = string_to_array(convert_string(S_WHITE + "Flee", (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25) - 3));
+
+flee_text[0] = S_WHITE + "I'm outta here.";
+flee_text[1] = S_WHITE + "Don't slow me down.";
+flee_text[2] = S_WHITE + "I've got better to do.";
+
 
 hiearchy = 0;
 set_hiearchy(HIEARCHY.ACTION_BUTTONS);

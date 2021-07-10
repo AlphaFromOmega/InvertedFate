@@ -43,11 +43,11 @@ switch (draw_type)
 	}
 	case GUI_DRAW.MONSTERS:
 	{
+		var x_dis = textbox_x1 + GUI_MARGIN * 1.25 + string_width("  ");
 		for (var i = 0; i < display_length; i++)
 		{
 			if (instance_exists(display[i]))
 			{
-				var x_dis = textbox_x1 + GUI_MARGIN * 1.25 + string_width("  ");
 				var y_dis = textbox_y1 + (textbox_y2 - textbox_y1)/2 - string_height("A") * 3/2 + string_height("A") * i
 				draw_text_special(x_dis, y_dis, display[i].array_name, 0);
 				var _mn = "* " + display[i].monster_name;
@@ -61,6 +61,16 @@ switch (draw_type)
 					draw_set_color(c_white);
 				}
 			}
+		}
+		break;
+	}
+	case GUI_DRAW.MERCY:
+	{
+		var x_dis = textbox_x1 + GUI_MARGIN * 1.25 + string_width("  ");
+		for (var i = 0; i < 1 + fleeable; i++)
+		{
+			var y_dis = textbox_y1 + (textbox_y2 - textbox_y1)/2 - string_height("A") * 3/2 + string_height("A") * i
+			draw_text_special(x_dis, y_dis, mercy[i], 0);
 		}
 		break;
 	}

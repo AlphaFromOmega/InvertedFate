@@ -6,10 +6,11 @@ act_result = [];
 image_xscale = 2;
 image_yscale = 2;
 
+normal_sprite = sprite_index;
+
 pivot_x = x;
 
 hit = 0;
-
 present = true;
 max_hp = hp;
 display_hp = hp;

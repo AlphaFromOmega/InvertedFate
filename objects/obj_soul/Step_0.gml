@@ -20,10 +20,10 @@ switch (obj_battle.hiearchy)
 	{
 		switch (obj_battle.selected_button)
 		{
-			case 0: case 1:
+			case 0: case 1: case 3:
 			{
 				x = BATTLE.textbox_x1 + GUI_MARGIN * 1.25 + 16;
-				y = BATTLE.textbox_y1 + (BATTLE.textbox_y2 - BATTLE.textbox_y1)/2 - string_height("A") * 3/2 + string_height("A") * BATTLE.selected_monster + 16;
+				y = BATTLE.textbox_y1 + (BATTLE.textbox_y2 - BATTLE.textbox_y1)/2 - string_height("A") * 3/2 + string_height("A") * BATTLE.selected_option + 16;
 				break;
 			}
 		}
@@ -38,6 +38,13 @@ switch (obj_battle.hiearchy)
 				x = BATTLE.textbox_x1 + ((BATTLE.selected_act % 2) ? (BATTLE.textbox_x2 - BATTLE.textbox_x1)/2 : GUI_MARGIN * 1.25) + 16;
 				y = BATTLE.textbox_y1 + (BATTLE.textbox_y2 - BATTLE.textbox_y1)/2 - string_height("A") * 3/2 + string_height("A") * BATTLE.selected_act div 2 + 16;
 				break;
+			}
+			case BUTTON.MERCY:
+			{
+				if (BATTLE.selected_option == 1)
+				{
+					x -= 1;
+				}
 			}
 		}
 		break;

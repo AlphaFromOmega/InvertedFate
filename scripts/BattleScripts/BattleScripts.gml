@@ -115,7 +115,7 @@ function change_hiearchy()
 			{
 				case BUTTON.FIGHT: // If fight is selected check for all monsters which are alive and have not been spared and display them in a list
 				{
-					selected_monster = 0;
+					selected_option = 0;
 					draw_type = GUI_DRAW.MONSTERS;
 					display_length = 0;
 					for (var i = 0; i < 6; i++)
@@ -141,7 +141,7 @@ function change_hiearchy()
 				}
 				case BUTTON.ACT: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
 				{
-					selected_monster = 0;
+					selected_option = 0;
 					draw_type = GUI_DRAW.MONSTERS;
 					display_length = 0;
 					for (var i = 0; i < 6; i++)
@@ -165,6 +165,21 @@ function change_hiearchy()
 					}
 					break;
 				}
+				case BUTTON.MERCY: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
+				{
+					var _spareable = false
+					with(par_monster)
+					{
+						if (spareable)
+						{
+							_spareable = true;
+						}
+					}
+					mercy[0] = string_to_array(convert_string(((_spareable) ? S_YELLOW : S_WHITE) + "Spare", (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25) - 3));
+					selected_option = 0;
+					draw_type = GUI_DRAW.MERCY;
+					break;
+				}
 			}
 			break;
 		}
@@ -174,7 +189,7 @@ function change_hiearchy()
 			{
 				case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
 				{
-					target = display[selected_monster];
+					target = display[selected_option];
 					draw_type = GUI_DRAW.METER;
 					
 					text_page = 0;
@@ -182,8 +197,55 @@ function change_hiearchy()
 				}
 				case BUTTON.ACT: // When a monster is selected on the fight options, display the meter and set the target
 				{
-					target = display[selected_monster];
+					target = display[selected_option];
 					draw_type = GUI_DRAW.ACT_TEXT;
+					break;
+				}
+				case BUTTON.MERCY:
+				{
+					switch (selected_option)
+					{
+						case 0:
+						{
+							var _ge = 0;
+							var _continue_fight = false;
+							with (par_monster)
+							{
+								if (spareable)
+								{
+									spare_monster();
+									_ge += gold_worth;
+								}
+								if (present)
+								{
+									_continue_fight = true;
+								}
+							}
+							gold_earned += _ge;
+							if (_continue_fight)
+							{
+								set_hiearchy(HIEARCHY.MONSTER_SPEECH);
+							}
+							else
+							{
+								set_hiearchy(HIEARCHY.BATTLE_WON);
+							}
+							break;
+						}
+						case 1:
+						{
+							typewriter_reset();
+							print = [];
+							flee_string = string_to_array(convert_string(flee_text[round(random(2))], (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)));
+							draw_type = GUI_DRAW.WIN_TEXT;
+							with (obj_soul)
+							{
+								sprite_index = spr_flee;
+								image_speed = 1;
+							}
+							break;
+						}
+					}
 					break;
 				}
 			}
@@ -215,6 +277,7 @@ function change_hiearchy()
 		}
 		case HIEARCHY.MONSTER_SPEECH:
 		{
+			draw_type = GUI_DRAW.NONE;
 			with (par_monster)
 			{
 				text_bubble = true;
@@ -241,8 +304,8 @@ function change_hiearchy()
 					cur_xp = global.xp_required[global.lv];
 					temp_earned -= cur_xp - prev_xp;
 				}
-			update_stats();
-			audio_play_sound(sfx_levelup, 100, false);
+				update_stats();
+				audio_play_sound(sfx_levelup, 100, false);
 			}
 			break;
 		}
@@ -253,4 +316,16 @@ function change_hiearchy()
 function set_hiearchy(_set)
 {
 	change_hiearchy(_set - hiearchy);
+}
+
+function spare_monster()
+{
+	present = false;
+	for (var i = 0; i < random_range(6, 12); i++)
+	{
+		var bb_width = bbox_right - bbox_left;
+		var bb_height = bbox_bottom - bbox_top;
+		instance_create_depth(random_range(bbox_left + bb_width/3, bbox_right - bb_width/3), random_range(bbox_top + bb_height/3, bbox_bottom - bb_height/3), depth - 1, obj_smoke);
+	}
+	audio_play_sound(sfx_kill, 100, false);
 }

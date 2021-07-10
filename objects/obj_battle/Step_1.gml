@@ -17,21 +17,42 @@ if ((keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(ord("X"))) && hi
 	var change = keyboard_check_pressed(ord("Z")) - keyboard_check_pressed(ord("X"));
 	switch (hiearchy)
 	{
+		case HIEARCHY.BUTTON_ACTION:
+		{
+			switch (selected_button)
+			{
+				case BUTTON.MERCY:
+				{
+					room_goto(rm_test);
+					break;
+				}
+				default:
+				{
+					audio_play_sound(sfx_select, 100, false);
+					change_hiearchy(change);
+					break;
+				}
+			}
+			break;
+		}
 		case HIEARCHY.BUTTON_RESULT:
 		{
-			if (selected_button == BUTTON.ACT && change > 0)
+			if (selected_button == BUTTON.ACT)
 			{
-				if (array_length(print) == array_length(target.act_result[selected_act][text_page]))
+				if (change > 0)
 				{
-					typewriter_reset();
-					print = [];
-					if (array_length(target.act_result[selected_act]) - 1 > text_page)
+					if (array_length(print) == array_length(target.act_result[selected_act][text_page]))
 					{
-						text_page++;
-					}
-					else
-					{
-						set_hiearchy(HIEARCHY.MONSTER_SPEECH);
+						typewriter_reset();
+						print = [];
+						if (array_length(target.act_result[selected_act]) - 1 > text_page)
+						{
+							text_page++;
+						}
+						else
+						{
+							set_hiearchy(HIEARCHY.MONSTER_SPEECH);
+						}
 					}
 				}
 			}
@@ -101,17 +122,17 @@ switch (hiearchy)
 		{
 			case 0:
 			{	
-				var _last = selected_monster;
-				selected_monster += _hdir + _vdir;
-				if (selected_monster < 0)
+				var _last = selected_option;
+				selected_option += _hdir + _vdir;
+				if (selected_option < 0)
 				{
-					selected_monster = display_length - 1;
+					selected_option = display_length - 1;
 				}
-				if (selected_monster >= display_length)
+				if (selected_option >= display_length)
 				{
-					selected_monster = 0;
+					selected_option = 0;
 				}
-				if (_last != selected_monster)
+				if (_last != selected_option)
 				{
 					audio_play_sound(sfx_switch, 2, false);
 				}
@@ -119,17 +140,40 @@ switch (hiearchy)
 			}
 			case 1:
 			{
-				var _last = selected_monster;
-				selected_monster += _hdir + _vdir;
-				if (selected_monster < 0)
+				var _last = selected_option;
+				selected_option += _hdir + _vdir;
+				if (selected_option < 0)
 				{
-					selected_monster = display_length - 1;
+					selected_option = display_length - 1;
 				}
-				if (selected_monster >= display_length)
+				if (selected_option >= display_length)
 				{
-					selected_monster = 0;
+					selected_option = 0;
 				}
-				if (_last != selected_monster)
+				if (_last != selected_option)
+				{
+					audio_play_sound(sfx_switch, 2, false);
+				}
+				break;
+			}
+			case 2:
+			{
+				break;
+			}
+			case 3:
+			{
+				var _last = selected_option;
+				selected_option += _hdir + _vdir;
+				var _options = 1 + fleeable
+				if (selected_option < 0)
+				{
+					selected_option = _options - 1;
+				}
+				if (selected_option >= _options)
+				{
+					selected_option = 0;
+				}
+				if (_last != selected_option)
 				{
 					audio_play_sound(sfx_switch, 2, false);
 				}
@@ -241,18 +285,29 @@ switch (hiearchy)
 			case BUTTON.ACT:
 			{
 				var _last = selected_act;
+				var _acts = array_length(target.act_result)
+				
 				selected_act += _hdir + _vdir * 2;
 				if (selected_act < 0)
 				{
-					selected_act = display_length - (1 - (_vdir * abs((display_length % 2) - abs((selected_act - 1) % 2))));
+					selected_act = _acts - (1 - (_vdir * abs((_acts  % 2) - abs((selected_act - 1) % 2))));
 				}
-				if (selected_act >= display_length)
+				if (selected_act >= _acts)
 				{
 					selected_act = _vdir * (selected_act % 2);
 				}
 				if (_last != selected_act)
 				{
 					audio_play_sound(sfx_switch, 2, false);
+				}
+				break;
+			}
+			case BUTTON.MERCY:
+			{
+				print = typewriter(flee_string, 30, sfx_voice_generic);
+				if (obj_soul.x < -16)
+				{
+					room_goto(rm_test);
 				}
 				break;
 			}
