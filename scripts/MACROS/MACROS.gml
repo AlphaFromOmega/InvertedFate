@@ -21,10 +21,11 @@ enum GUI_DRAW
 	MERCY,
 	ACT_TEXT,
 	METER,
+	ITEMS,
 	WIN_TEXT
 }
 
-enum HIEARCHY
+enum HIERARCHY
 {
 	DISABLED = -1,
 	ACTION_BUTTONS = 0,
@@ -71,5 +72,6 @@ enum MONSTER_MS
 #macro S_WHITE "[$"+string(c_white)+"]"
 #macro S_YELLOW "[$"+string(c_yellow)+"]"
 
+#macro INVENTORY obj_itemhandler
 
 #macro FNT_ATTACK global.fnt_attack

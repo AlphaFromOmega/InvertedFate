@@ -19,7 +19,7 @@ function damage_player(_amount)
 function end_turn()
 {
 	show_debug_message("Turn Over");
-	BATTLE.hiearchy = HIEARCHY.ACTION_BUTTONS;
+	BATTLE.hierarchy = HIERARCHY.ACTION_BUTTONS;
 	BATTLE.spawned = 0;
 	BATTLE.draw_type = GUI_DRAW.FLAVOUR_TEXT;
 	with (obj_pattern)
@@ -82,17 +82,17 @@ function find_target_monster()
 }
 
 /// @function change_hieachy([amount])
-function change_hiearchy()
+function change_hierarchy()
 {
 	var _change = (argument_count > 0) ? argument[0] : 0;
 	
 	typewriter_reset();
 	print = [];
-	hiearchy += _change;
+	hierarchy += _change;
 	
-	switch (hiearchy)
+	switch (hierarchy)
 	{
-		case HIEARCHY.DISABLED:
+		case HIERARCHY.DISABLED:
 		{
 			instance_destroy(obj_textbubble);
 			draw_type = GUI_DRAW.NONE;
@@ -103,13 +103,13 @@ function change_hiearchy()
 			break;
 		}
 		
-		case HIEARCHY.ACTION_BUTTONS: // If the hiearchy variable is for the action buttons, display flavour text
+		case HIERARCHY.ACTION_BUTTONS: // If the hierarchy variable is for the action buttons, display flavour text
 		{
 			draw_type = GUI_DRAW.FLAVOUR_TEXT;
 			break;
 		}
 		
-		case HIEARCHY.UI_BUTTONS: // If the hiearchy variable is for the ui buttons, check the responses for each selected button
+		case HIERARCHY.UI_BUTTONS: // If the hierarchy variable is for the ui buttons, check the responses for each selected button
 		{
 			switch (selected_button)
 			{
@@ -165,6 +165,11 @@ function change_hiearchy()
 					}
 					break;
 				}
+				case BUTTON.ITEM:
+				{
+					draw_type = GUI_DRAW.ITEMS
+					break;
+				}
 				case BUTTON.MERCY: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
 				{
 					var _spareable = false
@@ -183,7 +188,7 @@ function change_hiearchy()
 			}
 			break;
 		}
-		case HIEARCHY.BUTTON_ACTION: // If the variable is for the actions of the ui buttons 
+		case HIERARCHY.BUTTON_ACTION: // If the variable is for the actions of the ui buttons 
 		{
 			switch (selected_button)
 			{
@@ -199,6 +204,21 @@ function change_hiearchy()
 				{
 					target = display[selected_option];
 					draw_type = GUI_DRAW.ACT_TEXT;
+					break;
+				}
+				case BUTTON.ITEM:
+				{
+					if (INVENTORY.items[selected_option] == noone)
+					{
+						set_hierarchy(HIERARCHY.UI_BUTTONS);
+					}
+					else
+					{
+						text_page = 0;
+						item = INVENTORY.items[selected_option];
+						use_item(item);
+						draw_type = GUI_DRAW.FLAVOUR_TEXT;
+					}
 					break;
 				}
 				case BUTTON.MERCY:
@@ -224,11 +244,11 @@ function change_hiearchy()
 							gold_earned += _ge;
 							if (_continue_fight)
 							{
-								set_hiearchy(HIEARCHY.MONSTER_SPEECH);
+								set_hierarchy(HIERARCHY.MONSTER_SPEECH);
 							}
 							else
 							{
-								set_hiearchy(HIEARCHY.BATTLE_WON);
+								set_hierarchy(HIERARCHY.BATTLE_WON);
 							}
 							break;
 						}
@@ -251,7 +271,7 @@ function change_hiearchy()
 			}
 			break;
 		}
-		case HIEARCHY.BUTTON_RESULT:
+		case HIERARCHY.BUTTON_RESULT:
 		{
 			switch (selected_button)
 			{
@@ -275,7 +295,7 @@ function change_hiearchy()
 			}
 			break;
 		}
-		case HIEARCHY.MONSTER_SPEECH:
+		case HIERARCHY.MONSTER_SPEECH:
 		{
 			draw_type = GUI_DRAW.NONE;
 			with (par_monster)
@@ -284,7 +304,7 @@ function change_hiearchy()
 			}
 			break;
 		}
-		case HIEARCHY.BATTLE_WON:
+		case HIERARCHY.BATTLE_WON:
 		{
 			selected_button = -1;
 			draw_type = GUI_DRAW.WIN_TEXT;
@@ -312,10 +332,10 @@ function change_hiearchy()
 	}
 }
 
-/// @function set_hiearchy(hiearchy_id)
-function set_hiearchy(_set)
+/// @function set_hierarchy(hierarchy_id)
+function set_hierarchy(_set)
 {
-	change_hiearchy(_set - hiearchy);
+	change_hierarchy(_set - hierarchy);
 }
 
 function spare_monster()

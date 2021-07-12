@@ -39,11 +39,22 @@ function convert_string(_string, _width)
 	{
 		case "[":
 		{
-			while (string_char_at(_string, _i) != "]")
+			switch (string_char_at(_string, _i+1))
 			{
-				_i++;
+				case "$":
+				{
+					while (string_char_at(_string, _i) != "]")
+					{
+						_i++;
+					}
+					_i++;
+					break;
+				}
+				default:
+				{
+					break;
+				}
 			}
-			_i++;
 			break;
 		}
 		case " ":
@@ -142,14 +153,26 @@ function string_to_array(_string)
 		}
 		else
 		{
-			var _func_string = "";
-			while (string_char_at(_string, _i) != "]")
+			switch string_char_at(_string, _i + 1)
 			{
-				_func_string += string_char_at(_string, _i);
-				_i++;
+				case "$":
+				{
+					var _func_string = "";
+					while (string_char_at(_string, _i) != "]")
+					{
+						_func_string += string_char_at(_string, _i);
+						_i++;
+					}
+					_func_string += string_char_at(_string, _i);
+					_array[_j] = _func_string;
+					break;
+				}
+				default:
+				{
+					_array[_j] = string_char_at(_string,_i);
+					break;
+				}
 			}
-			_func_string += string_char_at(_string, _i);
-			_array[_j] = _func_string;
 		}
 		_j++;
 	}
@@ -181,6 +204,32 @@ function draw_text_special(_x, _y, _string, _animation)
 						string_last_pos("]", _string[_i])
 						var _col = real(string_lettersdigits(_string[_i]));
 						draw_set_color(_col);
+						break;
+					}
+					default:
+					{
+						var _offset_x = 0;
+						var _offset_y = 0;
+						switch (_animation)
+						{
+							default: case 0:
+							{
+								if (random(100) < 0.1)
+								{
+									_offset_x += random_range(-2, 2);
+									_offset_y += random_range(-2, 2);
+								}
+								break;
+							}
+							case 1:
+							{
+								_offset_x += random_range(-2, 2);
+								_offset_y += random_range(-2, 2);
+								break;
+							}
+						}
+						_total_length += string_width(_string[_i]);
+						draw_text(_x + _offset_x + _total_length, _y + _offset_y + _total_height, _string[_i]);
 						break;
 					}
 				}
