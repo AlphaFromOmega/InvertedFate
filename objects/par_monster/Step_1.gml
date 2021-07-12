@@ -2,8 +2,20 @@
 if (init)
 {
 	array_name = string_to_array(convert_string(S_WHITE + monster_name, 256));
+	if (check)
+	{
+		act[0] = string_to_array(convert_string(S_WHITE + "Check", 128));
+		act_result[0][0] = string_to_array(convert_string(S_WHITE + string_upper(monster_name) + " ATK " + string(check_atk) + " DEF " + string(check_def) + "#" + string(check_text[0]), (BATTLE.textbox_x2 + GUI_MARGIN * 1.25) - (BATTLE.textbox_x1 + GUI_MARGIN * 1.25) - 32));
+		for (var i = 1; i < array_length(check_text); i++;)
+		{
+			act_result[0][i] = string_to_array(convert_string(string(check_text[i]), (BATTLE.textbox_x2 + GUI_MARGIN * 1.25) - (BATTLE.textbox_x1 + GUI_MARGIN * 1.25) - 32));
+		}
+	}
 }
-
+if (spareable)
+{
+	array_name = string_to_array(convert_string(S_YELLOW + monster_name, 256));
+}
 
 y = round((obj_battle.ui9slice_y1 - 8) - (bbox_bottom - y));
 

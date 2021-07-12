@@ -1,7 +1,7 @@
 {
   "parent": {
-    "name": "Patterns",
-    "path": "folders/Objects/Battle/Patterns.yy",
+    "name": "Attack Patterns",
+    "path": "folders/Objects/Battle/Attack Patterns.yy",
   },
   "resourceVersion": "1.1",
   "name": "Pattern Creation",

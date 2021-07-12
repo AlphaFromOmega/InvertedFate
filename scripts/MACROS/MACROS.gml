@@ -18,18 +18,22 @@ enum GUI_DRAW
 	NONE,
 	FLAVOUR_TEXT,
 	MONSTERS,
+	MERCY,
+	ACT_TEXT,
 	METER,
+	ITEMS,
 	WIN_TEXT
 }
 
-enum HIEARCHY
+enum HIERARCHY
 {
 	DISABLED = -1,
 	ACTION_BUTTONS = 0,
 	UI_BUTTONS = 1,
 	BUTTON_ACTION = 2,
 	BUTTON_RESULT = 3,
-	BATTLE_WON = 4
+	MONSTER_SPEECH = 4,
+	BATTLE_WON = 5
 }
 
 enum BUTTON
@@ -40,6 +44,12 @@ enum BUTTON
 	MERCY
 }
 
+enum MONSTER_MS
+{
+	NULL = -3,
+	NO_TARGET = -2,
+	ATTACKED = -1
+}
 
 // Colours for text custom
 #macro S_AQUA "[$"+string(c_aqua)+"]"
@@ -61,3 +71,7 @@ enum BUTTON
 #macro S_TEAL "[$"+string(c_teal)+"]"
 #macro S_WHITE "[$"+string(c_white)+"]"
 #macro S_YELLOW "[$"+string(c_yellow)+"]"
+
+#macro INVENTORY obj_itemhandler
+
+#macro FNT_ATTACK global.fnt_attack

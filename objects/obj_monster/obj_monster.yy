@@ -23,12 +23,17 @@
   "physicsStartAwake": true,
   "physicsKinematic": false,
   "physicsShapePoints": [],
-  "eventList": [],
+  "eventList": [
+    {"isDnD":false,"eventNum":1,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+  ],
   "properties": [],
   "overriddenProperties": [
     {"propertyId":{"name":"monster_name","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"Test Monster","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"gold_worth","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"5","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"xp_worth","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"7","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"check","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"True","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"check_text","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"create_array(S_WHITE + \"Test Monsters are a volatile bunch.\", S_WHITE + \"So volatile infact they wanted a 2nd page of check text!\");","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"tb_offset_x","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"48","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
     "name": "Testing",

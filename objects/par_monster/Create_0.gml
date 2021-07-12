@@ -1,13 +1,16 @@
 /// @description ?
 init = true;
 array_name = [];
+act = [];
+act_result = [];
 image_xscale = 2;
 image_yscale = 2;
+
+normal_sprite = sprite_index;
 
 pivot_x = x;
 
 hit = 0;
-
 present = true;
 max_hp = hp;
 display_hp = hp;
@@ -31,3 +34,11 @@ else
 	}
 	show_debug_message(string(monster_name) + " pixel map was created");
 }
+
+spareable = false;
+
+recieve = -1;
+text_bubble = false;
+tb_string = "...";
+
+act_count = [0, 0, 0, 0, 0, 0];
