@@ -1,8 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-
-draw_set_color(c_white);
-draw_sprite_pscaled(spr_UI_box, 0, ui9slice_x1, ui9slice_y1, ui9slice_x2 - ui9slice_x1, ui9slice_y2 - ui9slice_y1, 0, c_white, 1);
+draw_reset();
 
 for (var i = 0; i < 4; i++)
 {
@@ -37,7 +35,7 @@ switch (draw_type)
 	}
 	case GUI_DRAW.FLAVOUR_TEXT: case GUI_DRAW.WIN_TEXT:
 	{
-		if (textbox_x1 == ui9slice_x1)
+		if (textbox_x1 == BB.ui9slice_x1)
 		{
 			var x_dis = textbox_x1 + GUI_MARGIN;
 			var y_dis = textbox_y1 + (textbox_y2 - textbox_y1)/2 - string_height("A") * 3/2;
@@ -110,7 +108,7 @@ switch (draw_type)
 	}
 	case GUI_DRAW.METER:
 	{
-		draw_sprite(spr_ui_battle_meter, 0, ui9slice_x1 + (ui9slice_x2 - ui9slice_x1)/2, ui9slice_y1 + (ui9slice_y2 - ui9slice_y1)/2)
+		draw_sprite(spr_ui_battle_meter, 0, BB.ui9slice_x1 + (BB.ui9slice_x2 - BB.ui9slice_x1)/2, BB.ui9slice_y1 + (BB.ui9slice_y2 - BB.ui9slice_y1)/2)
 		break;
 	}
 }

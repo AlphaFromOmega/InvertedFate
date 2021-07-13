@@ -41,11 +41,11 @@ function get_square_points(_originx, _originy, _length)
 
 function destined_box(_x1, _y1, _x2, _y2)
 {
-	BATTLE.destined_x1 = _x1;
-	BATTLE.destined_y1 = _y1;
-	BATTLE.destined_x2 = _x2;
-	BATTLE.destined_y2 = _y2;
-	BATTLE.lerp_prog = 0;
+	BB.destined_x1 = _x1;
+	BB.destined_y1 = _y1;
+	BB.destined_x2 = _x2;
+	BB.destined_y2 = _y2;
+	BB.lerp_prog = 0;
 }
 function create_circular_attack(_object, _target_x, _target_y, _radius, _amount, _angular_offset)
 {
@@ -96,7 +96,6 @@ function change_hierarchy()
 		{
 			instance_destroy(obj_textbubble);
 			draw_type = GUI_DRAW.NONE;
-			instance_create_depth(0, 0, 0, pat_debug_bone);
 			
 			turn++;
 			str = string_to_array(convert_string(script_execute(flavour_script), (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)));
@@ -302,6 +301,7 @@ function change_hierarchy()
 			{
 				text_bubble = true;
 			}
+			instance_create_depth(0, 0, 0, pat_debug_bone);
 			break;
 		}
 		case HIERARCHY.BATTLE_WON:

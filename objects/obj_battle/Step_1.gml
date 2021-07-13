@@ -2,34 +2,70 @@
 // You can write your code in this editor
 var _hdir, _vdir;
 
-lerp_prog += (1 - lerp_prog) / 50;
-
-ui9slice_x1 = lerp(ui9slice_x1, destined_x1, lerp_prog);
-ui9slice_y1 = lerp(ui9slice_y1, destined_y1, lerp_prog);
-ui9slice_x2 = lerp(ui9slice_x2, destined_x2, lerp_prog);
-ui9slice_y2 = lerp(ui9slice_y2, destined_y2, lerp_prog);
-
 _hdir = keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left);
 _vdir = keyboard_check_pressed(vk_down) - keyboard_check_pressed(vk_up);
 
 if ((keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(ord("X"))) && hierarchy != HIERARCHY.DISABLED && draw_type != GUI_DRAW.METER)
 {
 	var change = keyboard_check_pressed(ord("Z")) - keyboard_check_pressed(ord("X"));
-	switch (hierarchy)
+	
+	if (hierarchy + change < 0)
 	{
-		case HIERARCHY.BUTTON_ACTION:
+		change = 0;
+	}
+	if (change != 0)
+	{
+		switch (hierarchy)
 		{
-			switch (selected_button)
+			case HIERARCHY.BUTTON_ACTION:
 			{
-				case BUTTON.ITEM:
+				switch (selected_button)
+				{
+					case BUTTON.ITEM:
+					{
+						if (change > 0)
+						{
+							if (array_length(print) == array_length(item.array_use_string[text_page]))
+							{
+								typewriter_reset();
+								print = [];
+								if (array_length(item.array_use_string) - 1 > text_page)
+								{
+									text_page++;
+								}
+								else
+								{
+									set_hierarchy(HIERARCHY.MONSTER_SPEECH);
+								}
+							}
+						}
+						break;
+					}
+					case BUTTON.MERCY:
+					{
+						room_goto(rm_test);
+						break;
+					}
+					default:
+					{
+						audio_play_sound(sfx_select, 100, false);
+						change_hierarchy(change);
+						break;
+					}
+				}
+				break;
+			}
+			case HIERARCHY.BUTTON_RESULT:
+			{
+				if (selected_button == BUTTON.ACT)
 				{
 					if (change > 0)
 					{
-						if (array_length(print) == array_length(item.array_use_string[text_page]))
+						if (array_length(print) == array_length(target.act_result[selected_act][text_page]))
 						{
 							typewriter_reset();
 							print = [];
-							if (array_length(item.array_use_string) - 1 > text_page)
+							if (array_length(target.act_result[selected_act]) - 1 > text_page)
 							{
 								text_page++;
 							}
@@ -39,68 +75,33 @@ if ((keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(ord("X"))) && hi
 							}
 						}
 					}
-					break;
 				}
-				case BUTTON.MERCY:
+				else
 				{
-					room_goto(rm_test);
-					break;
+					set_hierarchy(HIERARCHY.DISABLED);
 				}
-				default:
-				{
-					audio_play_sound(sfx_select, 100, false);
-					change_hierarchy(change);
-					break;
-				}
+				break;
 			}
-			break;
-		}
-		case HIERARCHY.BUTTON_RESULT:
-		{
-			if (selected_button == BUTTON.ACT)
+			case HIERARCHY.MONSTER_SPEECH:
+			{
+				set_hierarchy(HIERARCHY.DISABLED);
+				break;
+			}
+			case HIERARCHY.BATTLE_WON:
 			{
 				if (change > 0)
 				{
-					if (array_length(print) == array_length(target.act_result[selected_act][text_page]))
-					{
-						typewriter_reset();
-						print = [];
-						if (array_length(target.act_result[selected_act]) - 1 > text_page)
-						{
-							text_page++;
-						}
-						else
-						{
-							set_hierarchy(HIERARCHY.MONSTER_SPEECH);
-						}
-					}
+					global.xp += xp_earned;
+					global.gold += gold_earned;
+					room_goto(rm_test);
 				}
+				break;
 			}
-			else
+			default:
 			{
-				set_hierarchy(HIERARCHY.DISABLED);
+				audio_play_sound(sfx_select, 100, false);
+				change_hierarchy(change);
 			}
-			break;
-		}
-		case HIERARCHY.MONSTER_SPEECH:
-		{
-			set_hierarchy(HIERARCHY.DISABLED);
-			break;
-		}
-		case HIERARCHY.BATTLE_WON:
-		{
-			if (change > 0)
-			{
-				global.xp += xp_earned;
-				global.gold += gold_earned;
-				room_goto(rm_test);
-			}
-			break;
-		}
-		default:
-		{
-			audio_play_sound(sfx_select, 100, false);
-			change_hierarchy(change);
 		}
 	}
 }
@@ -112,7 +113,7 @@ switch (hierarchy)
 	}
 	case HIERARCHY.ACTION_BUTTONS:
 	{
-		if (ui9slice_x1 == textbox_x1)
+		if (BB.ui9slice_x1 == textbox_x1)
 		{
 			print = typewriter(str, 30, sfx_voice_generic);
 		}
@@ -231,11 +232,11 @@ switch (hierarchy)
 						var _create = noone
 						if (instance_exists(obj_attackbar) || instance_exists(obj_attackbarcharge))
 						{
-							_create = instance_create_depth(ui9slice_x1, ui9slice_y1 + ((ui9slice_y2 - ui9slice_y1)/2), depth - 1, obj_attackbarcharge);
+							_create = instance_create_depth(BB.ui9slice_x1, BB.ui9slice_y1 + ((BB.ui9slice_y2 - BB.ui9slice_y1)/2), depth - 1, obj_attackbarcharge);
 						}
 						else
 						{
-							_create = instance_create_depth(ui9slice_x1, ui9slice_y1 + ((ui9slice_y2 - ui9slice_y1)/2), depth - 1, obj_attackbar);
+							_create = instance_create_depth(BB.ui9slice_x1, BB.ui9slice_y1 + ((BB.ui9slice_y2 - BB.ui9slice_y1)/2), depth - 1, obj_attackbar);
 						}
 						if (_create != noone)
 						{
@@ -265,7 +266,7 @@ switch (hierarchy)
 								var monster_count = 0;
 								with (par_monster)
 								{
-									if (hp > 0)
+									if (hp > 0 && present)
 									{
 										monster_count++;
 									}
@@ -373,7 +374,7 @@ switch (hierarchy)
 	case HIERARCHY.BATTLE_WON:
 	{
 		global.hp = global.hp;
-		if (ui9slice_x1 == textbox_x1)
+		if (BB.ui9slice_x1 == textbox_x1)
 		{
 			var _str = string_to_array(convert_string(win_text, (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)))
 			print = typewriter(_str, 30, sfx_voice_generic);

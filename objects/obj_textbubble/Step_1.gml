@@ -5,4 +5,7 @@ if (init)
 	init = false;
 }
 
-print = typewriter(string_text, 15);
+if (BB.lerp_prog > 0.5)
+{
+	print = typewriter(string_text, 15);
+}

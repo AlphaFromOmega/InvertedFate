@@ -17,7 +17,7 @@ if (spareable)
 	array_name = string_to_array(convert_string(S_YELLOW + monster_name, 256));
 }
 
-y = round((obj_battle.ui9slice_y1 - 8) - (bbox_bottom - y));
+y = round((BB.ui9slice_y1 - 8) - (bbox_bottom - y));
 
 hp = clamp(hp, 0, max_hp);
 

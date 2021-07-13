@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_textbubble_0",
-    "path": "sprites/spr_textbubble_0/spr_textbubble_0.yy",
+    "name": "spr_UI_box",
+    "path": "sprites/spr_UI_box/spr_UI_box.yy",
   },
   "solid": false,
   "visible": true,
@@ -23,19 +23,15 @@
   "eventList": [
     {"isDnD":false,"eventNum":1,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":2,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
-  "properties": [
-    {"varType":0,"value":"0","rangeEnabled":false,"rangeMin":0.0,"rangeMax":10.0,"listItems":[],"multiselect":false,"filters":[],"resourceVersion":"1.0","name":"type","tags":[],"resourceType":"GMObjectProperty",},
-  ],
+  "properties": [],
   "overriddenProperties": [],
   "parent": {
     "name": "UI",
     "path": "folders/Objects/Battle/UI.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_textbubble",
+  "name": "obj_bulletboard",
   "tags": [],
   "resourceType": "GMObject",
 }

@@ -2,12 +2,12 @@
 scr_controls();
 switch (obj_battle.hierarchy)
 {
-	case HIERARCHY.DISABLED:
+	case HIERARCHY.MONSTER_SPEECH: case HIERARCHY.DISABLED:
 	{
 		x += 3 * hdir;
 		y += 3 * vdir;
-		x = clamp(x,obj_battle.ui9slice_x1 + 14, obj_battle.ui9slice_x2 - 14);
-		y = clamp(y,obj_battle.ui9slice_y1 + 14, obj_battle.ui9slice_y2 - 14);
+		x = clamp(x,BB.ui9slice_x1 + 14, BB.ui9slice_x2 - 14);
+		y = clamp(y,BB.ui9slice_y1 + 14, BB.ui9slice_y2 - 14);
 		break;
 	}
 	case HIERARCHY.ACTION_BUTTONS:
