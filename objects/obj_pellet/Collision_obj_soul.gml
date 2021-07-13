@@ -1,2 +1,2 @@
 /// @description ?
-damage_player(1);
+damage_player(2);

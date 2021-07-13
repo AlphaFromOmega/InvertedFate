@@ -5,8 +5,8 @@
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "obj_pattern",
-    "path": "objects/obj_pattern/obj_pattern.yy",
+    "name": "par_pattern",
+    "path": "objects/par_pattern/par_pattern.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,

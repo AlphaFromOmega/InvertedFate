@@ -382,3 +382,13 @@ switch (hierarchy)
 		break;
 	}
 }
+if (global.hp <= 0 && !timeline_running)
+{
+	instance_destroy(par_attack);
+	instance_destroy(par_monster);
+	instance_destroy(par_pattern);
+	
+	timeline_index = tml_die;
+	timeline_position = 0;
+	timeline_running = true;
+}

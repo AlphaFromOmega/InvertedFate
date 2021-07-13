@@ -1,4 +1,4 @@
-Patterns need to be a child of the obj_pattern object.
+Patterns need to be a child of the par_pattern object.
 
-obj_pattern acts as a collective obj for patterns in cases where all of them may be needed.
+par_pattern acts as a collective obj for patterns in cases where all of them may be needed.
 e.g. end_turn destroying all patterns.

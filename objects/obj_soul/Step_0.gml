@@ -4,8 +4,9 @@ switch (obj_battle.hierarchy)
 {
 	case HIERARCHY.MONSTER_SPEECH: case HIERARCHY.DISABLED:
 	{
-		x += 3 * hdir;
-		y += 3 * vdir;
+		spd = (keyboard_check(ord("X"))) ? small_spd : main_spd;
+		x += spd * hdir;
+		y += spd * vdir;
 		x = clamp(x,BB.ui9slice_x1 + 14, BB.ui9slice_x2 - 14);
 		y = clamp(y,BB.ui9slice_y1 + 14, BB.ui9slice_y2 - 14);
 		break;
@@ -59,6 +60,12 @@ switch (obj_battle.hierarchy)
 				}
 			}
 		}
+		break;
+	}
+	case HIERARCHY.BUTTON_RESULT:
+	{
+		x = 17 + GUI_BATTLE_MARGIN_W + (obj_battle.selected_button * (sprite_get_width(spr_ui_battle_act) +  obj_battle.button_seperation));
+		y = display_get_gui_height() - (sprite_get_height(spr_ui_battle_act)/2 + GUI_BATTLE_MARGIN_H);
 		break;
 	}
 }

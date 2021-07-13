@@ -22,7 +22,7 @@ function end_turn()
 	BATTLE.hierarchy = HIERARCHY.ACTION_BUTTONS;
 	BATTLE.spawned = 0;
 	BATTLE.draw_type = GUI_DRAW.FLAVOUR_TEXT;
-	with (obj_pattern)
+	with (par_pattern)
 	{
 		instance_destroy();
 	}

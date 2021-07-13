@@ -85,3 +85,4 @@ set_hierarchy(HIERARCHY.ACTION_BUTTONS);
 
 empty = string_to_array(convert_string(S_GRAY + "[EMPTY]", 256));
 
+dead = false;
