@@ -11,7 +11,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "mus_ruins.mp3",
-  "duration": 122.258064,
+  "duration": 122.253059,
   "parent": {
     "name": "Music",
     "path": "folders/Sounds/Music.yy",

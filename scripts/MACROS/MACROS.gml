@@ -11,6 +11,7 @@
 #macro GUI_BATTLE_MARGIN_H 8
 
 #macro BATTLE obj_battle
+#macro BB obj_bulletboard
 
 
 enum GUI_DRAW

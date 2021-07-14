@@ -14,7 +14,7 @@
   "duration": 0.440374,
   "parent": {
     "name": "Items",
-    "path": "folders/Sounds/SFX/Items.yy",
+    "path": "folders/Sounds/SFX/Battle/Items.yy",
   },
   "resourceVersion": "1.0",
   "name": "sfx_heal",

@@ -18,6 +18,12 @@ function draw_sprite_pscaled(_sprite, _subimage, _x, _y, _xpscale, _ypscale, _ro
 	draw_sprite_ext(_sprite, _subimage, _x, _y, _xpscale/_s_width, _ypscale/_s_height, _rot, _col, _alpha);
 }
 
+function draw_reset()
+{
+	draw_set_alpha(1);
+	draw_set_color(c_white);
+}
+
 function update_stats()
 {
 	global.max_hp = 16 + global.lv * 4;
@@ -42,3 +48,4 @@ function change_music(_track)
 		}
 	}
 }
+

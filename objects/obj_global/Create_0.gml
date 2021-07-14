@@ -1,7 +1,7 @@
 /// @description ?
 full = false;
 
-global.name = "CHARA";
+global.name = "Chara";
 
 global.xp = 0;
 global.lv = 1;

@@ -313,3 +313,12 @@ function create_array()
 	}
 	return _array
 }
+function space_string(_string)
+{
+	var _new_string = "";
+	for (var i = 1; i < string_length(_string) - 1; i++)
+	{
+		_new_string += string_char_at(_string, i) + " ";
+	}
+	return _new_string;
+}

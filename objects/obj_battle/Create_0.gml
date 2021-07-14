@@ -10,19 +10,21 @@ textbox_y1 = display_get_gui_height() / 2 + 8;
 textbox_x2 = display_get_gui_width() - GUI_BATTLE_MARGIN_W;
 textbox_y2 = display_get_gui_height() / 2 + 150;
 
+instance_create_depth(0, 0, depth + 1, obj_bulletboard);
+
 barmake = 0;
 
 lerp_prog = 0;
 
-destined_x1 = textbox_x1;
-destined_y1 = textbox_y1;
-destined_x2 = textbox_x2;
-destined_y2 = textbox_y2;
+BB.destined_x1 = textbox_x1;
+BB.destined_y1 = textbox_y1;
+BB.destined_x2 = textbox_x2;
+BB.destined_y2 = textbox_y2;
 
-ui9slice_x1 = display_get_gui_width() / 2;
-ui9slice_y1 = textbox_y1;
-ui9slice_x2 = display_get_gui_width() / 2;
-ui9slice_y2 = textbox_y2;
+BB.ui9slice_x1 = display_get_gui_width() / 2;
+BB.ui9slice_y1 = textbox_y1;
+BB.ui9slice_x2 = display_get_gui_width() / 2;
+BB.ui9slice_y2 = textbox_y2;
 
 button[3] = spr_ui_battle_mercy;
 button[2] = spr_ui_battle_item;
@@ -83,3 +85,4 @@ set_hierarchy(HIERARCHY.ACTION_BUTTONS);
 
 empty = string_to_array(convert_string(S_GRAY + "[EMPTY]", 256));
 
+dead = false;
