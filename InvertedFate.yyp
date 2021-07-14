@@ -81,6 +81,7 @@
     {"id":{"name":"sfx_hit","path":"sounds/sfx_hit/sfx_hit.yy",},"order":0,},
     {"id":{"name":"spr_ui_battle_fight","path":"sprites/spr_ui_battle_fight/spr_ui_battle_fight.yy",},"order":1,},
     {"id":{"name":"itm_gftea","path":"objects/itm_gftea/itm_gftea.yy",},"order":0,},
+    {"id":{"name":"sfx_flee","path":"sounds/sfx_flee/sfx_flee.yy",},"order":6,},
     {"id":{"name":"sfx_switch","path":"sounds/sfx_switch/sfx_switch.yy",},"order":2,},
     {"id":{"name":"sprite_pragma","path":"scripts/sprite_pragma/sprite_pragma.yy",},"order":2,},
     {"id":{"name":"obj_textbox","path":"objects/obj_textbox/obj_textbox.yy",},"order":4,},
@@ -174,7 +175,7 @@
     {"folderPath":"folders/Sprites/UI/Battle/Text Bubbles.yy","order":9,"resourceVersion":"1.0","name":"Text Bubbles","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Scripts/Battle.yy","order":8,"resourceVersion":"1.0","name":"Battle","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Objects/Items.yy","order":13,"resourceVersion":"1.0","name":"Items","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Sounds/SFX/Items.yy","order":6,"resourceVersion":"1.0","name":"Items","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Sounds/SFX/Battle/Items.yy","order":5,"resourceVersion":"1.0","name":"Items","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Sounds/SFX/Battle/Death.yy","order":4,"resourceVersion":"1.0","name":"Death","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [

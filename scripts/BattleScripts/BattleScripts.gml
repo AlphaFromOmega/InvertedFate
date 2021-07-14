@@ -3,7 +3,7 @@ function damage_player(_amount)
 {
 	if (instance_exists(obj_soul))
 	{
-		if (obj_soul.inv == 0)
+		if (obj_soul.inv == 0 && obj_soul.draw)
 		{
 			global.hp = clamp(global.hp - _amount, 0, global.max_hp);
 			obj_soul.inv = global.inv;
@@ -93,7 +93,7 @@ function change_hierarchy()
 	switch (hierarchy)
 	{
 		case HIERARCHY.DISABLED:
-		{
+		{		
 			instance_destroy(obj_textbubble);
 			draw_type = GUI_DRAW.NONE;
 			
@@ -257,6 +257,7 @@ function change_hierarchy()
 							print = [];
 							flee_string = string_to_array(convert_string(flee_text[round(random(2))], (textbox_x2 + GUI_MARGIN * 1.25) - (textbox_x1 + GUI_MARGIN * 1.25)));
 							draw_type = GUI_DRAW.WIN_TEXT;
+							audio_play_sound(sfx_flee, 100, false);
 							with (obj_soul)
 							{
 								sprite_index = spr_flee;
