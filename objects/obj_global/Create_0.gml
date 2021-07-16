@@ -7,7 +7,7 @@ global.xp = 0;
 global.lv = 1;
 global.gold = 0;
 
-global.inv = 40;
+global.inv = 30;
 
 global.max_hp = 16 + global.lv * 4;
 
