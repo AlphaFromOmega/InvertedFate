@@ -54,7 +54,7 @@ else
 {
 	if (hit > 0)
 	{
-		x = pivot_x + ((hit div 4 % 2) + 1) * 8;
+		x = pivot_x + ((hit div 4 % 2) + 1) * 2;
 		hit--;
 	}
 }

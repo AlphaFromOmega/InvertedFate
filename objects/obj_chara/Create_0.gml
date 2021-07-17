@@ -5,3 +5,5 @@ sprite_left = spr_chara_left;
 sprite_down = spr_chara_down;
 sprite_right = spr_chara_right;
 sprite_up = spr_chara_up;
+
+lock = false;

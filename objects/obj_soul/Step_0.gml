@@ -40,13 +40,13 @@ switch (obj_battle.hierarchy)
 	{
 		switch (obj_battle.selected_button)
 		{
-			case BUTTON.ACT:
+			case BATTLE_BUTTON.ACT:
 			{
 				x = BATTLE.textbox_x1 + ((BATTLE.selected_act % 2) ? (BATTLE.textbox_x2 - BATTLE.textbox_x1)/2 : GUI_MARGIN * 1.25) + 16;
 				y = BATTLE.textbox_y1 + (BATTLE.textbox_y2 - BATTLE.textbox_y1)/2 - string_height("A") * 3/2 + string_height("A") * BATTLE.selected_act div 2 + 16;
 				break;
 			}
-			case BUTTON.MERCY:
+			case BATTLE_BUTTON.MERCY:
 			{
 				if (BATTLE.selected_option == 1)
 				{

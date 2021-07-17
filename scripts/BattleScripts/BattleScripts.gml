@@ -112,7 +112,7 @@ function change_hierarchy()
 		{
 			switch (selected_button)
 			{
-				case BUTTON.FIGHT: // If fight is selected check for all monsters which are alive and have not been spared and display them in a list
+				case BATTLE_BUTTON.FIGHT: // If fight is selected check for all monsters which are alive and have not been spared and display them in a list
 				{
 					selected_option = 0;
 					draw_type = GUI_DRAW.MONSTERS;
@@ -138,7 +138,7 @@ function change_hierarchy()
 					}
 					break;
 				}
-				case BUTTON.ACT: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
+				case BATTLE_BUTTON.ACT: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
 				{
 					selected_option = 0;
 					draw_type = GUI_DRAW.MONSTERS;
@@ -164,12 +164,12 @@ function change_hierarchy()
 					}
 					break;
 				}
-				case BUTTON.ITEM:
+				case BATTLE_BUTTON.ITEM:
 				{
 					draw_type = GUI_DRAW.ITEMS
 					break;
 				}
-				case BUTTON.MERCY: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
+				case BATTLE_BUTTON.MERCY: // If act is selected check for all monsters which are alive and have not been spared and display them in a list
 				{
 					var _spareable = false
 					with(par_monster)
@@ -191,7 +191,7 @@ function change_hierarchy()
 		{
 			switch (selected_button)
 			{
-				case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
+				case BATTLE_BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
 				{
 					target = display[selected_option];
 					draw_type = GUI_DRAW.METER;
@@ -199,13 +199,13 @@ function change_hierarchy()
 					text_page = 0;
 					break;
 				}
-				case BUTTON.ACT: // When a monster is selected on the fight options, display the meter and set the target
+				case BATTLE_BUTTON.ACT: // When a monster is selected on the fight options, display the meter and set the target
 				{
 					target = display[selected_option];
 					draw_type = GUI_DRAW.ACT_TEXT;
 					break;
 				}
-				case BUTTON.ITEM:
+				case BATTLE_BUTTON.ITEM:
 				{
 					if (INVENTORY.items[selected_option] == noone)
 					{
@@ -220,7 +220,7 @@ function change_hierarchy()
 					}
 					break;
 				}
-				case BUTTON.MERCY:
+				case BATTLE_BUTTON.MERCY:
 				{
 					switch (selected_option)
 					{
@@ -275,11 +275,11 @@ function change_hierarchy()
 		{
 			switch (selected_button)
 			{
-				case BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
+				case BATTLE_BUTTON.FIGHT: // When a monster is selected on the fight options, display the meter and set the target
 				{
 					break;
 				}
-				case BUTTON.ACT: // When an act has been chosen send that to the monster object
+				case BATTLE_BUTTON.ACT: // When an act has been chosen send that to the monster object
 				{
 					l = 0;
 					draw_type = GUI_DRAW.FLAVOUR_TEXT;
@@ -310,7 +310,7 @@ function change_hierarchy()
 			selected_button = -1;
 			draw_type = GUI_DRAW.WIN_TEXT;
 			l = 0;
-			win_text = S_WHITE + "YOU WON!#You earned " + string(xp_earned) + " EXP and " + string(gold_earned) + "G."
+			win_text = S_WHITE + "YOU WON!#You earned " + string(xp_earned) + " XP and " + string(gold_earned) + "G."
 								
 			if (xp_earned + global.xp > global.xp_required[global.lv])
 			{

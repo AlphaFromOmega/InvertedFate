@@ -37,7 +37,7 @@ enum HIERARCHY
 	BATTLE_WON = 5
 }
 
-enum BUTTON
+enum BATTLE_BUTTON
 {
 	FIGHT,
 	ACT,
@@ -50,6 +50,14 @@ enum MONSTER_MS
 	NULL = -3,
 	NO_TARGET = -2,
 	ATTACKED = -1
+}
+
+enum MENU_BUTTON
+{
+	ITEM,
+	STAT,
+	CELL,
+	SPELL
 }
 
 // Colours for text custom

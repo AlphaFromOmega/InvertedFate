@@ -5,7 +5,7 @@ if (global.hp > 0)
 {
 	for (var i = 0; i < 4; i++)
 	{
-		draw_sprite(button[i], (selected_button == i && hierarchy < 2 + (selected_button == BUTTON.ACT) && hierarchy > -1) ? 1 : 0, GUI_BATTLE_MARGIN_W + i * (sprite_get_width(button[0]) + button_seperation), display_get_gui_height() - GUI_BATTLE_MARGIN_H);
+		draw_sprite(button[i], (selected_button == i && hierarchy < 2 + (selected_button == BATTLE_BUTTON.ACT) && hierarchy > -1) ? 1 : 0, GUI_BATTLE_MARGIN_W + i * (sprite_get_width(button[0]) + button_seperation), display_get_gui_height() - GUI_BATTLE_MARGIN_H);
 	}
 	// Draw Name and Level
 	draw_set_font(fnt_info);

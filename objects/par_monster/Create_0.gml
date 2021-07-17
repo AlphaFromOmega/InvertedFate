@@ -3,8 +3,9 @@ init = true;
 array_name = [];
 act = [];
 act_result = [];
-image_xscale = 2;
-image_yscale = 2;
+scale = 2;
+image_xscale = scale
+image_yscale = scale;
 
 normal_sprite = sprite_index;
 

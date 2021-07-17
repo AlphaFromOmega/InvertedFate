@@ -29,7 +29,7 @@
     {"propertyId":{"name":"desc_string","path":"objects/par_item/par_item.yy",},"objectId":{"name":"par_item","path":"objects/par_item/par_item.yy",},"value":"A curious tea blend with a welcoming warmth.","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"desc_short","path":"objects/par_item/par_item.yy",},"objectId":{"name":"par_item","path":"objects/par_item/par_item.yy",},"value":"Curious and Warm tea blend","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"item_attribute","path":"objects/par_item/par_item.yy",},"objectId":{"name":"par_item","path":"objects/par_item/par_item.yy",},"value":"All HP","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
-    {"propertyId":{"name":"use_string","path":"objects/par_item/par_item.yy",},"objectId":{"name":"par_item","path":"objects/par_item/par_item.yy",},"value":"create_array(S_WHITE + \"You drank the Golden Flower Tea.#Your HP was maxed out\")","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"use_string","path":"objects/par_item/par_item.yy",},"objectId":{"name":"par_item","path":"objects/par_item/par_item.yy",},"value":"create_array(S_WHITE + \"You drank the Golden Flower Tea.#Your HP was maxed out!\")","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
     "name": "Items",
