@@ -29,8 +29,10 @@ function update_stats()
 	global.max_hp = 16 + global.lv * 4;
 	if (global.lv == 20)
 	{
-		global.max_hp = 99
+		global.max_hp = 99;
 	}
+	global.at = (global.lv - 1) * 2;
+	global.df = global.lv div 4.25;
 }
 
 function change_music(_track)

@@ -5,6 +5,11 @@ cd = 1;
 
 menu[0] = "ITEM";
 menu[1] = "STAT";
-menu[2] = "CELL";
 
-selected = 0;
+// SPELL and CELL should be tied to story progression
+menu[2] = "CELL";
+menu[3] = "SPELL";
+
+selected_option = 0;
+
+selected = false;

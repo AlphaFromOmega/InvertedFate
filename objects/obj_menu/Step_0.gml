@@ -8,23 +8,28 @@ var change = (keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left)
 
 if (change != 0)
 {
-	selected += change;
+	selected_option += change;
 	
-	if (selected >= array_length(menu))
+	if (selected_option >= array_length(menu))
 	{
-		selected = 0;
+		selected_option = 0;
 	}
-	if (selected < 0)
+	if (selected_option < 0)
 	{
-		selected = array_length(menu) - 1;
+		selected_option = array_length(menu) - 1;
 	}
 	audio_play_sound(sfx_switch, 100, false);
 }
 
 if (keyboard_check_pressed(ord("Z")))
 {
-	switch (selected)
+	selected = true;
+	switch (selected_option)
 	{
-		
+		case 1:
+		{
+			
+			break;
+		}
 	}
 }

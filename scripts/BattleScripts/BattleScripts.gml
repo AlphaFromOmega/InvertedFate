@@ -310,7 +310,7 @@ function change_hierarchy()
 			selected_button = -1;
 			draw_type = GUI_DRAW.WIN_TEXT;
 			l = 0;
-			win_text = S_WHITE + "YOU WON!#You earned " + string(xp_earned) + " EXP and " + string(gold_earned) + "G."
+			win_text = S_WHITE + "YOU WON!#You earned " + string(xp_earned) + " xp and " + string(gold_earned) + "G."
 								
 			if (xp_earned + global.xp > global.xp_required[global.lv])
 			{
