@@ -7,10 +7,11 @@ draw_sprite_pscaled(spr_UI_box, 0, GUI_MARGIN_H + 16, display_get_gui_height()/2
 draw_set_valign(fa_middle);
 draw_set_halign(fa_left);
 var t_l = (array_length(menu) - 1);
+var m_offset = (array_length(menu) < 3) ? 16 : 0;
 for (var i = 0; i < array_length(menu); i++;)
 {
 	draw_set_color((disabled[i] ? c_gray : c_white));
-	draw_text(GUI_MARGIN_H + 64, display_get_gui_height()/2 - (t_l * 16) + 32 * i, menu[i]);
+	draw_text(GUI_MARGIN_H + 64, display_get_gui_height()/2 - (t_l * 16) + (32 * i) - m_offset, menu[i]);
 }
 
 // Draw menu
@@ -98,7 +99,10 @@ if (hierarchy > 0)
 }
 else
 {
-	draw_sprite(spr_soul_menu, 0, GUI_MARGIN_H + 44, display_get_gui_height()/2 - (t_l * 16) + 32 * selected_menu);
+	if (hierarchy > -1)
+	{
+		draw_sprite(spr_soul_menu, 0, GUI_MARGIN_H + 44, display_get_gui_height()/2 - (t_l * 16) + (32 * selected_menu) - m_offset);
+	}
 }
 
 // Small stats window

@@ -4,16 +4,7 @@
 hdir = keyboard_check(vk_right) - keyboard_check(vk_left);
 vdir = keyboard_check(vk_down) - keyboard_check(vk_up);
 image_speed = 0;
-if (hdir != 0)
-{
-	sprite_index = (hdir > 0) ? sprite_right : sprite_left;
-	image_speed = 1;
-}
-else if (vdir != 0)
-{
-	sprite_index = (vdir > 0) ? sprite_down : sprite_up;
-	image_speed = 1;
-}
+
 hsp = hdir * WALK_SPEED;
 vsp = vdir * WALK_SPEED;
 
@@ -21,6 +12,20 @@ if (lock)
 {
 	hsp = 0;
 	vsp = 0;
+	
+}
+else
+{
+	if (hdir != 0)
+	{
+		sprite_index = (hdir > 0) ? sprite_right : sprite_left;
+		image_speed = 1;
+	}
+	else if (vdir != 0)
+	{
+		sprite_index = (vdir > 0) ? sprite_down : sprite_up;
+		image_speed = 1;
+	}
 }
 
 x += hsp;

@@ -7,8 +7,11 @@ menu[0] = "ITEM";
 menu[1] = "STAT";
 
 // SPELL and CELL should be tied to story progression
-menu[2] = "CELL";
-menu[3] = "SPELL";
+if (debug_mode)
+{
+	menu[2] = "CELL";
+	menu[3] = "SPELL";
+}
 
 disabled = array_create(4, false);
 
