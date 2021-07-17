@@ -7,10 +7,7 @@ function use_item(_item)
 	{
 		event_user(0);
 	}
-	if (INVENTORY.items[_location] == noone)
-	{
-		sort_items();
-	}
+	sort_items();
 }
 
 function remove_item(_item)
@@ -21,10 +18,7 @@ function remove_item(_item)
 	{
 		event_user(1);
 	}
-	if (INVENTORY.items[_location] == noone)
-	{
-		sort_items();
-	}
+	sort_items();
 }
 
 /// @function find_item(item)

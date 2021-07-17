@@ -28,7 +28,7 @@
     {"propertyId":{"name":"item_name","path":"objects/par_item/par_item.yy",},"objectId":{"name":"par_item","path":"objects/par_item/par_item.yy",},"value":"Toy Knife","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"item_attribute","path":"objects/par_item/par_item.yy",},"objectId":{"name":"par_item","path":"objects/par_item/par_item.yy",},"value":"3 ATK","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"desc_string","path":"objects/par_item/par_item.yy",},"objectId":{"name":"par_item","path":"objects/par_item/par_item.yy",},"value":"Made of plastic. A rarity nowadays.","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
-    {"propertyId":{"name":"desc_short","path":"objects/par_item/par_item.yy",},"objectId":{"name":"par_item","path":"objects/par_item/par_item.yy",},"value":"Made of plastic. A rarity nowadays.","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"desc_short","path":"objects/par_item/par_item.yy",},"objectId":{"name":"par_item","path":"objects/par_item/par_item.yy",},"value":"Semi-sharp plastic blade.","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
     "name": "Weapons",

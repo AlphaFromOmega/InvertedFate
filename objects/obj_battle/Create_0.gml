@@ -1,8 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-atk = global.at + global.item_at + BASE_ATK; // Max Attack power (will be based on the global variable in the future)
-def = global.df + global.item_df + BASE_DF;
+t_atk = 0; // Temporary stat buffs and penalties.
+t_def = 0;
 
 attack = false;
 

@@ -8,7 +8,7 @@ attack = 8;
 
 target = BATTLE.target;
 
-var atk_r = BATTLE.atk + random(2);
+var atk_r = global.at + global.item_at + BATTLE.t_atk + BASE_ATK + random(2);
 var _damage = 0
 for (var i = 0; i < global.weapon_amount; i++)
 {
