@@ -36,7 +36,7 @@
     "path": "folders/Objects/Items.yy",
   },
   "resourceVersion": "1.0",
-  "name": "itm_gftea",
+  "name": "item_gftea",
   "tags": [],
   "resourceType": "GMObject",
 }

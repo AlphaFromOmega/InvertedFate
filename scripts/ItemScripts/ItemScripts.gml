@@ -71,6 +71,10 @@ function sort_items()
 		{
 			break;
 		}
+		else
+		{
+			INVENTORY.items[_i].location = _i;
+		}
 	}
 	INVENTORY.item_count = _i;
 	show_debug_message(INVENTORY.item_count);

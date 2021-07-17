@@ -34,6 +34,9 @@
     {"propertyId":{"name":"check","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"True","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"check_text","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"create_array(S_WHITE + \"Test Monsters are a volatile bunch.\", S_WHITE + \"So volatile infact they wanted a 2nd page of check text!\");","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"tb_offset_x","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"48","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"attack","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"12","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"defence","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"3","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"hp","path":"objects/par_monster/par_monster.yy",},"objectId":{"name":"par_monster","path":"objects/par_monster/par_monster.yy",},"value":"30","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
     "name": "Testing",

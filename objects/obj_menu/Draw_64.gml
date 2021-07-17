@@ -27,7 +27,14 @@ if (hierarchy > 0)
 			draw_sprite_pscaled(spr_UI_box, 0, GUI_MARGIN_H + 172, 52, 346, 362, image_angle, image_blend, image_alpha);
 			for (var i = 0; i < INVENTORY.item_count; i++;)
 			{
-				draw_text(side_margin + 16, top_margin + 44 + 32 * i, INVENTORY.items[i].item_name);
+				if (instance_exists(INVENTORY.items[i]))
+				{
+					draw_text(side_margin + 16, top_margin + 44 + 32 * i, INVENTORY.items[i].item_name);
+				}
+				else
+				{
+					sort_items();
+				}
 			}
 				
 			draw_text(side_margin + 16, top_margin + 324, "USE");
@@ -59,7 +66,7 @@ if (hierarchy > 0)
 			}
 			else
 			{
-				draw_sprite(spr_soul_menu, 0, side_margin - 1, top_margin + 44 + 16 * i * selected_item);
+				draw_sprite(spr_soul_menu, 0, side_margin - 1, top_margin + 44 + 32 * selected_item);
 			}
 			
 			break;
@@ -85,8 +92,8 @@ if (hierarchy > 0)
 			draw_text(side_margin + 168, top_margin + 188, "EXP: " + string(global.xp));
 			draw_text(side_margin + 168, top_margin + 220, "NEXT: " + string(global.xp_required[global.lv] - global.xp));
 			
-			draw_text(side_margin, top_margin + 280, "WEAPON: " + "WEAPON HERE");
-			draw_text(side_margin, top_margin + 312, "ARMOR: " + "ARMOR HERE");
+			draw_text(side_margin, top_margin + 280, "WEAPON: " + global.weapon_name);
+			draw_text(side_margin, top_margin + 312, "ARMOR: " + global.armour_name);
 			
 			draw_text(side_margin, top_margin + 352, "GOLD: " + string(global.gold));
 			if (global.kills >= 20)

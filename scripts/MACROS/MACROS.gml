@@ -63,6 +63,13 @@ enum MENU_BUTTON
 	SPELL
 }
 
+enum WEAPON_STYLE
+{
+	SINGLE,
+	MASH,
+	MULTI
+}
+
 // Colours for text custom
 #macro S_AQUA "[$"+string(c_aqua)+"]"
 #macro S_BLACK "[$"+string(c_black)+"]"

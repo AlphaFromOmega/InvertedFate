@@ -11,7 +11,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sfx_player_hit.wav",
-  "duration": 0.476655,
+  "duration": 0.471655,
   "parent": {
     "name": "Attack",
     "path": "folders/Sounds/SFX/Battle/Attack.yy",
