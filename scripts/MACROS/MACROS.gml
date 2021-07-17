@@ -1,6 +1,9 @@
 //@desc Conatins Macros
 #macro WALK_SPEED 2
 
+#macro BASE_ATK 10
+#macro BASE_DF 10
+
 #macro GUI_TEXTBOX_HEIGHT 142
 #macro GUI_TEXTBOX_WIDTH 608
 

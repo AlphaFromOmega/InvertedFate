@@ -1,4 +1,7 @@
 /// @description ?
+
+owner = obj_monster
+
 hsp = lerp(hsp, lengthdir_x(spd, dir), accel/1000);
 vsp = lerp(vsp, lengthdir_y(spd, dir), accel/1000);
 

@@ -1,2 +1,2 @@
 /// @description ?
-damage_player(2);
+damage_player(owner.attack);

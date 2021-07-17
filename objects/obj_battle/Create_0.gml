@@ -1,7 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-atk = 120; // Max Attack power (will be based on the global variable in the future)
+atk = global.at + global.item_at + BASE_ATK; // Max Attack power (will be based on the global variable in the future)
+def = global.df + global.item_df + BASE_DF;
 
 button_seperation = (display_get_gui_width() - (sprite_get_width(spr_ui_battle_act) * 4 + GUI_BATTLE_MARGIN_W * 2)) / 3;
 

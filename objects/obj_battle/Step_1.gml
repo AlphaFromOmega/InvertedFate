@@ -295,18 +295,18 @@ switch (hierarchy)
 						}
 						else
 						{
+							var atk_r = atk + random(2);
 							var _damage = 0
 							for (var i = 0; i < spawn_max; i++)
 							{
-								if (attack_accuracy[i] == -1)
-								{
-									continue;
-								}
-								_damage += (1 - attack_accuracy[i]);
+								_damage += attack_accuracy[i];
 							}
 							_damage = _damage/spawn_max;
-							_damage *= atk;
+							show_debug_message(_damage);
+							
+							_damage *= max(atk_r - target.defense, 1);
 							_damage = round(_damage);
+							
 							var _dmgtext = instance_create_depth(target.x, target.y, target.depth - 1, obj_dmgtext);
 							_dmgtext.damage = _damage
 							_dmgtext.monster = target;

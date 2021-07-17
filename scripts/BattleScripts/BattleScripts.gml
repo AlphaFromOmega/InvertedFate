@@ -5,7 +5,8 @@ function damage_player(_amount)
 	{
 		if (obj_soul.inv == 0 && obj_soul.draw)
 		{
-			global.hp = clamp(global.hp - _amount, 0, global.max_hp);
+			var _damage_scaled = max(_amount - (global.df + global.item_df + BASE_DF), 1);
+			global.hp = max(global.hp - _damage_scaled, 0);
 			obj_soul.inv = global.inv;
 			audio_play_sound(sfx_player_hit, 100, false);
 			if (variable_instance_exists(id, "destructable") && destructable)
