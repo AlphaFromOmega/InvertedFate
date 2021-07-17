@@ -29,7 +29,10 @@ if ((array_length(str) > l))
 	if (string_lettersdigits(string_char_at(str[l], 1)) != "" && char != floor(l))
 	{
 		char = floor(l);
-		audio_play_sound(voice, 2, false);
+		if (audio_exists(voice))
+		{
+			audio_play_sound(voice, 2, false);
+		}
 	}
 }
 else

@@ -9,22 +9,64 @@ draw_set_halign(fa_left);
 var t_l = (array_length(menu) - 1);
 for (var i = 0; i < array_length(menu); i++;)
 {
+	draw_set_color((disabled[i] ? c_gray : c_white));
 	draw_text(GUI_MARGIN_H + 64, display_get_gui_height()/2 - (t_l * 16) + 32 * i, menu[i]);
 }
 
-draw_sprite(spr_battle_soul_red, 0, GUI_MARGIN_H + 44, display_get_gui_height()/2 - (t_l * 16) + 32 * selected_option)
-
 // Draw menu
-draw_set_valign(fa_top);
-if (selected)
+if (hierarchy > 0)
 {
-	draw_sprite_pscaled(spr_UI_box, 0, GUI_MARGIN_H + 172, 52, 346, 418, image_angle, image_blend, image_alpha);
 	var side_margin = GUI_MARGIN_H + 200;
 	var top_margin = 53;
-	switch (selected_option)
+	switch (selected_menu)
 	{
+		case 0:
+		{
+			draw_set_valign(fa_center);
+			draw_sprite_pscaled(spr_UI_box, 0, GUI_MARGIN_H + 172, 52, 346, 362, image_angle, image_blend, image_alpha);
+			for (var i = 0; i < INVENTORY.item_count; i++;)
+			{
+				draw_text(side_margin + 16, top_margin + 44 + 32 * i, INVENTORY.items[i].item_name);
+			}
+				
+			draw_text(side_margin + 16, top_margin + 324, "USE");
+			draw_text(side_margin + 112, top_margin + 324, "INFO");
+			draw_text(side_margin + 226, top_margin + 324, "DROP");
+			
+			if (hierarchy > 1)
+			{
+				var s_margin = 0
+				switch (selected_option)
+				{
+					case 0:
+					{
+						s_margin = -1;
+						break;
+					}
+					case 1:
+					{
+						s_margin = 96;
+						break;
+					}
+					case 2:
+					{
+						s_margin = 210;
+						break;
+					}
+				}
+				draw_sprite(spr_soul_menu, 0, side_margin + s_margin, top_margin + 324);
+			}
+			else
+			{
+				draw_sprite(spr_soul_menu, 0, side_margin - 1, top_margin + 44 + 16 * i * selected_item);
+			}
+			
+			break;
+		}
 		case 1:
 		{
+			draw_set_valign(fa_top);
+			draw_sprite_pscaled(spr_UI_box, 0, GUI_MARGIN_H + 172, 52, 346, 418, image_angle, image_blend, image_alpha);
 			draw_text(side_margin, top_margin + 32, "\"" + string(global.name) + "\"");
 			
 			draw_text(side_margin, top_margin + 92, "LV");
@@ -54,8 +96,13 @@ if (selected)
 		}
 	}
 }
+else
+{
+	draw_sprite(spr_soul_menu, 0, GUI_MARGIN_H + 44, display_get_gui_height()/2 - (t_l * 16) + 32 * selected_menu);
+}
 
 // Small stats window
+draw_set_valign(fa_top);
 draw_sprite_pscaled(spr_UI_box, 0, GUI_MARGIN_H + 16, stats_y, 142, 110, image_angle, image_blend, image_alpha);
 draw_text(GUI_MARGIN_H + 32, stats_y + 9, string(global.name));
 

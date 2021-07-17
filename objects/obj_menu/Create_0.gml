@@ -10,6 +10,12 @@ menu[1] = "STAT";
 menu[2] = "CELL";
 menu[3] = "SPELL";
 
+disabled = array_create(4, false);
+
+selected_menu = 0;
+selected_item = 0;
 selected_option = 0;
 
-selected = false;
+hierarchy = 0;
+
+disabled[0] = (INVENTORY.item_count <= 0)

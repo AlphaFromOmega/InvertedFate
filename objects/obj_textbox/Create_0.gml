@@ -9,6 +9,8 @@ print = "";
 //change = 10;
 char = 0;
 
+textbox_y = (obj_chara.y > obj_camera.y) ? GUI_MARGIN : display_get_gui_height() - (52 + 110);
+
 textbox_max_size = string_height("J") * 3;
 hmargin = textbox_max_size;
 

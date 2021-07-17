@@ -21,7 +21,7 @@ if ((keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(ord("X"))) && hi
 			{
 				switch (selected_button)
 				{
-					case BUTTON.ITEM:
+					case BATTLE_BUTTON.ITEM:
 					{
 						if (change > 0)
 						{
@@ -41,7 +41,7 @@ if ((keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(ord("X"))) && hi
 						}
 						break;
 					}
-					case BUTTON.MERCY:
+					case BATTLE_BUTTON.MERCY:
 					{
 						room_goto(rm_test);
 						break;
@@ -57,7 +57,7 @@ if ((keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(ord("X"))) && hi
 			}
 			case HIERARCHY.BUTTON_RESULT:
 			{
-				if (selected_button == BUTTON.ACT)
+				if (selected_button == BATTLE_BUTTON.ACT)
 				{
 					if (change > 0)
 					{
@@ -222,7 +222,7 @@ switch (hierarchy)
 	{
 		switch (selected_button)
 		{
-			case BUTTON.FIGHT:
+			case BATTLE_BUTTON.FIGHT:
 			{
 				if (spawned < spawn_max) // If bars do not excceed the max
 				{
@@ -318,7 +318,7 @@ switch (hierarchy)
 				}
 				break;
 			}
-			case BUTTON.ACT:
+			case BATTLE_BUTTON.ACT:
 			{
 				var _last = selected_act;
 				var _acts = array_length(target.act_result)
@@ -338,12 +338,12 @@ switch (hierarchy)
 				}
 				break;
 			}
-			case BUTTON.ITEM:
+			case BATTLE_BUTTON.ITEM:
 			{
 				print = typewriter(item.array_use_string[text_page], 30, sfx_voice_generic);
 				break;
 			}
-			case BUTTON.MERCY:
+			case BATTLE_BUTTON.MERCY:
 			{
 				print = typewriter(flee_string, 30, sfx_voice_generic);
 				if (obj_soul.x < -16)
@@ -359,11 +359,11 @@ switch (hierarchy)
 	{
 		switch (selected_button)
 		{
-			case BUTTON.FIGHT:
+			case BATTLE_BUTTON.FIGHT:
 			{
 				// Attack
 			}
-			case BUTTON.ACT:
+			case BATTLE_BUTTON.ACT:
 			{
 				print = typewriter(target.act_result[selected_act][text_page], 30, sfx_voice_generic);
 				break;

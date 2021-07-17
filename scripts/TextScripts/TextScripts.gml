@@ -23,9 +23,10 @@ function create_textbox(_message, _speed)
 		head = _sprite;
 		font = _font;
 		animation = _animation;
-		offset_spr = sprite_exists(_sprite) ? 144 : 0; 
+		offset_spr = sprite_exists(_sprite) ? 144 : GUI_MARGIN; 
 		str = string_to_array(convert_string(_message, GUI_TEXTBOX_WIDTH - (offset_spr + GUI_MARGIN*4), _font));
 	}
+	return _obj;
 }
 
 ///@function convert_string(string, width, [font], astricks)
