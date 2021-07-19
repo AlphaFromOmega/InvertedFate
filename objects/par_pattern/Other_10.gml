@@ -1,1 +1,1 @@
-/// @description When attack mode is enabled
+/// @description Attack
