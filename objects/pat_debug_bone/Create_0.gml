@@ -1,4 +1,6 @@
 /// @description ?
+event_inherited();
+
 var _originx = BATTLE.textbox_x1 + (BATTLE.textbox_x2 - BATTLE.textbox_x1)/2;
 var _originy = BATTLE.textbox_y1 + (BATTLE.textbox_y2 - BATTLE.textbox_y1)/2 - 32;
 
@@ -17,5 +19,3 @@ final_over = false;
 
 target_x = 0;
 target_y = 0;
-
-alarm_set(0, 10 * room_speed);

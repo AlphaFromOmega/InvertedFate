@@ -224,7 +224,7 @@ switch (hierarchy)
 		{
 			case BATTLE_BUTTON.FIGHT:
 			{
-				if (spawned < spawn_max) // If bars do not excceed the max
+				if (spawned < global.weapon_amount) // If bars do not excceed the max
 				{
 					if (barmake == 0) // Check if the bar timer is 0
 					{
@@ -292,27 +292,6 @@ switch (hierarchy)
 									set_hierarchy(HIERARCHY.BATTLE_WON);
 								}
 							}
-						}
-						else
-						{
-							var _damage = 0
-							for (var i = 0; i < spawn_max; i++)
-							{
-								if (attack_accuracy[i] == -1)
-								{
-									continue;
-								}
-								_damage += (1 - attack_accuracy[i]);
-							}
-							_damage = _damage/spawn_max;
-							_damage *= atk;
-							_damage = round(_damage);
-							var _dmgtext = instance_create_depth(target.x, target.y, target.depth - 1, obj_dmgtext);
-							_dmgtext.damage = _damage
-							_dmgtext.monster = target;
-							
-							target.hit = 30;
-							target.hp -= _damage;
 						}
 					}
 				}

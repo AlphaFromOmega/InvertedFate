@@ -1,6 +1,14 @@
 /// @description ?
 if (init)
 {
+	if (check_atk = "")
+	{
+		check_atk = attack;
+	}
+	if (check_def = "")
+	{
+		check_def = defence;
+	}
 	array_name = string_to_array(convert_string(S_WHITE + monster_name, 256));
 	if (check)
 	{
@@ -11,6 +19,7 @@ if (init)
 			act_result[0][i] = string_to_array(convert_string(string(check_text[i]), (BATTLE.textbox_x2 + GUI_MARGIN * 1.25) - (BATTLE.textbox_x1 + GUI_MARGIN * 1.25) - 32));
 		}
 	}
+	init = false;
 }
 if (spareable)
 {
@@ -54,7 +63,7 @@ else
 {
 	if (hit > 0)
 	{
-		x = pivot_x + ((hit div 4 % 2) + 1) * 2;
+		x = pivot_x + sin(hit/2) * 8;
 		hit--;
 	}
 }

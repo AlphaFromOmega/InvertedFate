@@ -1,4 +1,4 @@
-/// @description When attack mode is enabled
+/// @description Attack Mode
 if (attack == 0)
 {
 	switch (round(random(1)))

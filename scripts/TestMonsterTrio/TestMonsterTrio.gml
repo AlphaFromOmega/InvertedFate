@@ -10,7 +10,6 @@ function TestMonsterTrio()
 	else
 	{
 		var _r = random(3)
-		show_debug_message(_r)
 		switch (round(_r))
 		{
 			case 0:

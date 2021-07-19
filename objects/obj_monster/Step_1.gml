@@ -16,7 +16,6 @@ if (recieve != MONSTER_MS.NULL)
 			case MONSTER_MS.NO_TARGET:
 			{
 				var _t = find_target_monster();
-				show_debug_message(_t.recieve);
 				switch (_t.recieve)
 				{
 					case MONSTER_MS.ATTACKED:
