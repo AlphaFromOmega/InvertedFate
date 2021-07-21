@@ -30,3 +30,6 @@ global.xp_required = [0, 10, 30, 70, 120, 200, 300, 500, 800, 1200, 1700, 2500, 
 global.music = noone;
 
 change_music(mus_ruins);
+
+room_x = -1;
+room_y = -1;

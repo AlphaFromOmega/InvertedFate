@@ -43,7 +43,7 @@ if ((keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(ord("X"))) && hi
 					}
 					case BATTLE_BUTTON.MERCY:
 					{
-						room_goto(rm_test);
+						room_goto(end_room);
 						break;
 					}
 					default:
@@ -93,7 +93,7 @@ if ((keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(ord("X"))) && hi
 				{
 					global.xp += xp_earned;
 					global.gold += gold_earned;
-					room_goto(rm_test);
+					room_goto(end_room);
 				}
 				break;
 			}
@@ -327,7 +327,7 @@ switch (hierarchy)
 				print = typewriter(flee_string, 30, sfx_voice_generic);
 				if (obj_soul.x < -16)
 				{
-					room_goto(rm_test);
+					room_goto(end_room);
 				}
 				break;
 			}

@@ -28,8 +28,7 @@ else
 	}
 }
 
-x += hsp;
-y += vsp;
+collision_player();
 
 if (hsp == 0 && vsp == 0)
 {

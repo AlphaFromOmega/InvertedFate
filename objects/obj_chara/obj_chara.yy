@@ -5,7 +5,10 @@
   },
   "solid": false,
   "visible": true,
-  "spriteMaskId": null,
+  "spriteMaskId": {
+    "name": "spr_chara_down",
+    "path": "sprites/spr_chara_down/spr_chara_down.yy",
+  },
   "persistent": false,
   "parentObjectId": null,
   "physicsObject": false,
