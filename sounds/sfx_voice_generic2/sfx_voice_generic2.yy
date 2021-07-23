@@ -11,7 +11,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sfx_voice_generic2.wav",
-  "duration": 1.719286,
+  "duration": 1.714286,
   "parent": {
     "name": "Voices",
     "path": "folders/Sounds/SFX/Voices.yy",

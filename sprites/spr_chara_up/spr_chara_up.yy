@@ -1,5 +1,5 @@
 {
-  "bboxMode": 0,
+  "bboxMode": 2,
   "collisionKind": 1,
   "type": 0,
   "origin": 9,
@@ -7,9 +7,9 @@
   "edgeFiltering": false,
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
-  "bbox_left": 0,
-  "bbox_right": 18,
-  "bbox_top": 0,
+  "bbox_left": 3,
+  "bbox_right": 15,
+  "bbox_top": 25,
   "bbox_bottom": 28,
   "HTile": false,
   "VTile": false,
@@ -82,7 +82,7 @@
   "nineSlice": null,
   "parent": {
     "name": "Character",
-    "path": "folders/Sprites/Character.yy",
+    "path": "folders/Sprites/Overworld/Character.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_chara_up",
