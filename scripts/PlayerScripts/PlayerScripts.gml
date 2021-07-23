@@ -6,10 +6,10 @@ function scr_controls()
 
 function collision_player()
 {	
-	if (place_meeting(x + hsp, y, obj_solid))
+	if (place_meeting(x + hsp, y, par_solid))
 	{
 		var n_hsp = 0;
-		while (!place_meeting(x + n_hsp + sign(hsp), y, obj_solid))
+		while (!place_meeting(x + n_hsp + sign(hsp), y, par_solid))
 		{
 			n_hsp += sign(hsp);
 		}
@@ -17,10 +17,10 @@ function collision_player()
 	}
 	x += hsp;
 	
-	if (place_meeting(x, y + vsp, obj_solid))
+	if (place_meeting(x, y + vsp, par_solid))
 	{
 		var n_vsp = 0;
-		while (!place_meeting(x, y + n_vsp + sign(vsp), obj_solid))
+		while (!place_meeting(x, y + n_vsp + sign(vsp), par_solid))
 		{
 			n_vsp += sign(vsp);
 		}

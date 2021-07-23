@@ -1,6 +1,6 @@
 {
   "compression": 0,
-  "volume": 0.5,
+  "volume": 1.0,
   "preload": false,
   "bitRate": 128,
   "sampleRate": 44100,
@@ -10,14 +10,14 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "sfx_voice_generic2.wav",
-  "duration": 1.714286,
+  "soundFile": "sfx_savepoint.wav",
+  "duration": 0.712971,
   "parent": {
-    "name": "Voices",
-    "path": "folders/Sounds/SFX/Voices.yy",
+    "name": "SFX",
+    "path": "folders/Sounds/SFX.yy",
   },
   "resourceVersion": "1.0",
-  "name": "sfx_voice_generic2",
+  "name": "sfx_savepoint",
   "tags": [],
   "resourceType": "GMSound",
 }
