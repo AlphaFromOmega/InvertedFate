@@ -303,7 +303,7 @@ function change_hierarchy()
 			{
 				text_bubble = true;
 			}
-			instance_create_depth(0, 0, 0, pat_debug_bone);
+			instance_create_depth(0, 0, 0, pattern);
 			break;
 		}
 		case HIERARCHY.BATTLE_WON:

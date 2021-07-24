@@ -2,3 +2,6 @@ Patterns need to be a child of the par_pattern object.
 
 par_pattern acts as a collective obj for patterns in cases where all of them may be needed.
 e.g. end_turn destroying all patterns.
+
+A pattern can be used to create more patterns which allows for a single pattern to contain random attack
+patterns, run patterns sequentially, or run mutple patterns for mutiple enemies.
