@@ -41,6 +41,7 @@ if (hp == 0)
 	if (sprite_destroy == 0)
 	{
 		audio_play_sound(sfx_kill, 1, false);
+		global.kills++;
 	}
 	sprite_destroy++;
 	if (sprite_destroy < sprite_get_height(sprite_index))

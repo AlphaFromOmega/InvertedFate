@@ -4,7 +4,10 @@
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "par_ui",
+    "path": "objects/par_ui/par_ui.yy",
+  },
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,

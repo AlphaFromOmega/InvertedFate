@@ -2,10 +2,14 @@
 function use_item(_item)
 {
 	var _location = find_item(_item);
-	INVENTORY.items[_location] = noone;
+	if (_location != noone)
+	{
+		INVENTORY.items[_location] = noone;
+	}
 	with (_item)
 	{
 		event_user(0);
+		show_debug_message("Used Item - " + object_get_name(_item.object_index));
 	}
 	sort_items();
 }
@@ -13,7 +17,10 @@ function use_item(_item)
 function remove_item(_item)
 {
 	var _location = find_item(_item);
-	INVENTORY.items[_location] = noone;
+	if (_location != noone)
+	{
+		INVENTORY.items[_location] = noone;
+	}
 	with (_item)
 	{
 		event_user(1);
@@ -26,7 +33,7 @@ function find_item(_item)
 {
 	for (var _i = 0; _i < array_length(INVENTORY.items); _i++;)
 	{
-		if (INVENTORY.items[_i].id == _item.id)
+		if (instance_exists(INVENTORY.items[_i]) && INVENTORY.items[_i].id == _item.id)
 		{
 			return _i;
 		}

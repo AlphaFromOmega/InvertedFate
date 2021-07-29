@@ -4,7 +4,10 @@
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "par_ui",
+    "path": "objects/par_ui/par_ui.yy",
+  },
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
@@ -24,8 +27,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Function Objects",
-    "path": "folders/Objects/Function Objects.yy",
+    "name": "UI Objects",
+    "path": "folders/Objects/Overworld/UI Objects.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_textbox_queue",

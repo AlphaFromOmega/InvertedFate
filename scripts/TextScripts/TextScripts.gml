@@ -323,3 +323,12 @@ function space_string(_string)
 	}
 	return _new_string;
 }
+///@function jitter(amount, offset)
+function jitter(_amount, _offset)
+{
+	if (random(1) <= _amount)
+	{
+		return (random(2) - 1) * _offset;
+	}
+	return 0;
+}
