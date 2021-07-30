@@ -144,7 +144,7 @@ function convert_string(_string, _width)
 function string_to_array(_string)
 {
 	var _string_length = string_length(_string);
-	var _array;
+	var _array = [];
 	var _j = 0;
 	for (var _i = 1; _i < _string_length + 1; _i++;)
 	{
@@ -242,6 +242,10 @@ function draw_text_special(_x, _y, _string, _animation)
 				var _offset_y = 0;
 				switch (_animation)
 				{
+					case -1:
+					{
+						break;
+					}
 					default: case 0:
 					{
 						if (random(100) < 0.1)

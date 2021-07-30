@@ -21,4 +21,5 @@ selected_option = 0;
 
 hierarchy = 0;
 
+sort_items();
 disabled[0] = (INVENTORY.item_count <= 0)

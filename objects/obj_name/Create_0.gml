@@ -34,7 +34,7 @@ else
 allowed = true;
 
 bottom_options = ["Quit", "Backspace", "Done"];
-bottom_x = [148, 302, 478];
+bottom_x = [120, 240, 440];
 
 cursor_x = 0;
 cursor_y = 0;

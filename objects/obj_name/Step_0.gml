@@ -11,7 +11,7 @@ if (changing_scene)
 		file_delete("save.dtr");
 		ResetGame();
 		global.name = player_name;
-		room_goto(rm_ruins_flowey);
+		room_goto(rm_ruins_cutscene_intro);
 	}
 }
 else
